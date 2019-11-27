@@ -16,18 +16,18 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btAnhadir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="@string/a_adir" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btVolver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="@string/volver" />
     </LinearLayout>
 
     <LinearLayout
@@ -39,9 +39,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imgFotovideojuego"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
             android:layout_weight="1"
             app:srcCompat="@mipmap/ic_launcher" />
 
@@ -55,12 +56,12 @@
                 android:id="@+id/txvNombreVideojuego"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nombre" />
+                android:text="@string/nombre" />
 
             <EditText
                 android:id="@+id/txNombreVideojuego"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:ems="10"
                 android:inputType="textPersonName" />
 
@@ -71,17 +72,18 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/txv "
+                    android:id="@+id/txvDesarrolladora"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Desarrollador"
+                    android:text="@string/desarrolladxora"
                     android:textSize="12sp" />
 
                 <Spinner
                     android:id="@+id/drpbtDesarrollador"
                     android:layout_width="150dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:entries="@array/Desarrolladoras"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -90,8 +92,10 @@
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
         android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <TextView
@@ -99,26 +103,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Género" />
+            android:text="@string/genero" />
 
         <Spinner
             android:id="@+id/drpbtGenero"
-            android:layout_width="100dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:entries="@array/Generos" />
 
         <TextView
             android:id="@+id/txvAnhoSalida"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Año Salida" />
+            android:text="@string/anho_salida" />
 
-        <Spinner
-            android:id="@+id/drpbtAnhoSalida"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+        <EditText
+            android:id="@+id/txAnhoSalida"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName" />
 
     </LinearLayout>
 
@@ -126,10 +133,11 @@
         android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:layout_weight="1"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        tools:layout_editor_absoluteX="79dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -138,25 +146,24 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/txvPlataforma"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
+                android:text="@string/plataforma" />
 
             <Switch
-                android:id="@+id/switch2"
+                android:id="@+id/swPC"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="PC" />
+                android:text="@string/pc" />
 
             <Switch
-                android:id="@+id/switch3"
+                android:id="@+id/swXbox"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="XBOX" />
+                android:text="@string/xbox" />
 
         </LinearLayout>
 
@@ -168,38 +175,84 @@
             android:orientation="vertical">
 
             <Switch
-                android:id="@+id/switch4"
+                android:id="@+id/swPlayStation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="PlayStation" />
+                android:text="@string/playstation" />
 
             <Switch
-                android:id="@+id/switch5"
+                android:id="@+id/swSwitch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Switch" />
+                android:text="@string/NS" />
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
         android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/txvValoracion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Valoración" />
+            android:text="@string/valoraci_n" />
 
         <RatingBar
-            android:id="@+id/ratingBar2"
-            android:layout_width="match_parent"
+            android:id="@+id/rtValoracion"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:numStars="5"
+            android:stepSize="0.1" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+        <TextView
+            android:id="@+id/txvTienda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tienda"
+            />
+
+        <Spinner
+            android:id="@+id/drpbtTienda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/Tienda"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+
+        <Switch
+            android:id="@+id/swFavorito"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/favorito" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,3 +1,50 @@
 <resources>
     <string name="app_name">Trabajo1</string>
+    <string name="tienda">Tienda</string>
+    <string name="favorito">Favorito</string>
+    <string name="valoraci_n">Valoración</string>
+    <string name="NS">Switch</string>
+    <string name="playstation">PlayStation</string>
+    <string name="xbox">XBOX</string>
+    <string name="pc">PC</string>
+    <string name="plataforma">Plataforma</string>
+    <string name="anho_salida">Año Salida</string>
+    <string name="genero">Género</string>
+    <string name="desarrolladxora">Desarrolladxora</string>
+    <string name="nombre">Nombre</string>
+    <string name="volver">Volver</string>
+    <string name="a_adir">Añadir</string>
+
+    <string-array name="Desarrolladoras">
+        <item>Seleccione</item>
+        <item>Nintendo</item>
+        <item>Rockstar</item>
+        <item>Ubisoft</item>
+        <item>Sony</item>
+        <item>EA</item>
+        <item>Valve</item>
+    </string-array>
+
+    <string-array name="Generos">
+        <item>Seleccione</item>
+        <item>MMO</item>
+        <item>MOBA</item>
+        <item>FPS</item>
+        <item>Simulacion</item>
+        <item>RPG</item>
+        <item>Lucha</item>
+    </string-array>
+
+
+    <string-array name="Tienda">
+        <item>Seleccione</item>
+        <item>GAME</item>
+        <item>FNAC</item>
+        <item>GameStop</item>
+        <item>Amazon</item>
+        <item>Ebay</item>
+        <item>AliExpress</item>
+    </string-array>
+
+
 </resources>
