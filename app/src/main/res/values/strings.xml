@@ -16,7 +16,7 @@
     <string name="a_adir">Añadir</string>
 
     <string-array name="Desarrolladoras">
-        <item>Seleccione</item>
+        <item></item>
         <item>Nintendo</item>
         <item>Rockstar</item>
         <item>Ubisoft</item>
@@ -26,7 +26,7 @@
     </string-array>
 
     <string-array name="Generos">
-        <item>Seleccione</item>
+        <item></item>
         <item>MMO</item>
         <item>MOBA</item>
         <item>FPS</item>
@@ -37,7 +37,7 @@
 
 
     <string-array name="Tienda">
-        <item>Seleccione</item>
+        <item></item>
         <item>GAME</item>
         <item>FNAC</item>
         <item>GameStop</item>

@@ -9,7 +9,7 @@ public class Videojuego {
     private String nombre;
     private String desarrolladora;
     private String genero;
-    private int anhoSalida;
+    private String anhoSalida;
     private boolean PC;
     private boolean xbox;
     private boolean playStation;
@@ -18,6 +18,36 @@ public class Videojuego {
     private String tienda;
     private boolean favorito;
 
+    Videojuego(String nombre, String desarrolladora, String genero, String anhoSalida, boolean PC, boolean xbox, boolean playStation, boolean SW, float valoracion, String tienda,
+                boolean favorito){
+        this.nombre = nombre;
+        this.desarrolladora = desarrolladora;
+        this.genero = genero;
+        this.anhoSalida = anhoSalida;
+        this.PC = PC;
+        this.xbox = xbox;
+        this.playStation = playStation;
+        this.SW = SW;
+        this.valoracion = valoracion;
+        this.tienda = tienda;
+        this.favorito = favorito;
+    }
+
+    Videojuego(float ID, String nombre, String desarrolladora, String genero, String anhoSalida, boolean PC, boolean xbox, boolean playStation, boolean SW, float valoracion, String tienda,
+               boolean favorito){
+        this.ID=ID;
+        this.nombre = nombre;
+        this.desarrolladora = desarrolladora;
+        this.genero = genero;
+        this.anhoSalida = anhoSalida;
+        this.PC = PC;
+        this.xbox = xbox;
+        this.playStation = playStation;
+        this.SW = SW;
+        this.valoracion = valoracion;
+        this.tienda = tienda;
+        this.favorito = favorito;
+    }
 
     public Bitmap getImagen() {
         return imagen;
@@ -58,11 +88,11 @@ public class Videojuego {
         this.genero = genero;
     }
 
-    public int getAnhoSalida() {
+    public String getAnhoSalida() {
         return anhoSalida;
     }
 
-    public void setAnhoSalida(int anhoSalida) {
+    public void setAnhoSalida(String anhoSalida) {
         this.anhoSalida = anhoSalida;
     }
 
