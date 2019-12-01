@@ -12,12 +12,13 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private ArrayList<Videojuego> videojuegos;
     private VideojuegoAdapter adaptador;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adaptador = new VideojuegoAdapter(this, videojuegos);
         lvVideojuego.setAdapter(adaptador);
 
+        lvVideojuego.setOnItemClickListener(this);
         registerForContextMenu(lvVideojuego);
     }
 
@@ -73,14 +75,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btAnhadirMain:
                 Intent intent = new Intent(this, AnhadirJuego.class);
                 startActivity(intent);
-
                 break;
-
         }
     }
 
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+        Intent intentMapa = new Intent(this, DetallesJuego.class);
 
+        //TODO poner el intent de la imagen
+        //intentMapa.putExtra("imagen", videojuegos.get(i).getImagen());
+        intentMapa.putExtra("nombre", videojuegos.get(i).getNombre());
+        intentMapa.putExtra("desarrolladora", videojuegos.get(i).getDesarrolladora());
+        intentMapa.putExtra("genero", videojuegos.get(i).getGenero());
+        intentMapa.putExtra("anhoSalida", videojuegos.get(i).getAnhoSalida());
+        intentMapa.putExtra("pc", videojuegos.get(i).isPC());
+        intentMapa.putExtra("xbox", videojuegos.get(i).isXbox());
+        intentMapa.putExtra("playStation", videojuegos.get(i).isPlayStation());
+        intentMapa.putExtra("sw", videojuegos.get(i).isSW());
+        intentMapa.putExtra("valoracion", videojuegos.get(i).getValoracion());
+        intentMapa.putExtra("tienda", videojuegos.get(i).getTienda());
+        intentMapa.putExtra("favorito", videojuegos.get(i).isFavorito());
 
-
+        startActivity(intentMapa);
+    }
 }
