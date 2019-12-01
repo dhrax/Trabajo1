@@ -40,12 +40,9 @@ public class AnhadirJuego extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
     @Override
     public void onClick(View v) {
-
         switch(v.getId()){
-
             case R.id.btVolver:
                 onBackPressed();
                 break;
@@ -65,7 +62,6 @@ public class AnhadirJuego extends AppCompatActivity implements View.OnClickListe
                 Spinner drpbtTienda = findViewById(R.id.drpbtTienda);
                 Switch swFavorito =findViewById(R.id.swFavorito);
 
-
                 String nombre = txNombreVideojuego.getText().toString();
                 if (nombre.equals("")) {
                     Toast.makeText(this, "Tiene que añadir un nombre para añadir el videojuego", Toast.LENGTH_LONG).show();
@@ -75,17 +71,33 @@ public class AnhadirJuego extends AppCompatActivity implements View.OnClickListe
                 Bitmap imagen = ((BitmapDrawable) imgFotovideojuego.getDrawable()).getBitmap();
 
                 String desarrolladora = drpbtDesarrollador.getSelectedItem().toString();
+                if(desarrolladora.equals(String.valueOf(R.string.DrpBtnPorDefecto)))
+                    desarrolladora=String.valueOf(R.string.desconocida);
+
                 String genero = drpbtGenero.getSelectedItem().toString();
+                if(genero.equals(String.valueOf(R.string.DrpBtnPorDefecto)))
+                    genero=String.valueOf(R.string.desconocido);
+
                 String anhoSalida = txAnhoSalida.getText().toString();
-                if (anhoSalida.equals("")) {
+                if (anhoSalida.equals(""))
                     anhoSalida="????";
+                else if(!Util.isNumeric(anhoSalida)){
+                    Toast.makeText(this, "La fecha de salida tiene que ser un número entero", Toast.LENGTH_LONG).show();
+                    return;
+                }else if(!Util.fechaValida(anhoSalida)){
+                    Toast.makeText(this, "La fecha de salida tiene que ser un mayor o igual a "+Util.FECHA_PRIMER_VIDEOJUEO, Toast.LENGTH_LONG).show();
+                    return;
                 }
+
                 boolean pc = swPC.isChecked();
                 boolean xbox = swXbox.isChecked();
                 boolean playStation = swPlayStation.isChecked();
                 boolean sw = swSwitch.isChecked();
                 float valoracion = rtValoracion.getRating();
                 String tienda = drpbtTienda.getSelectedItem().toString();
+                if(tienda.equals(String.valueOf(R.string.DrpBtnPorDefecto)))
+                    tienda=String.valueOf(R.string.desconocida);
+
                 boolean favorito =swFavorito.isChecked();
 
                 Videojuego videojuego = new Videojuego(nombre, desarrolladora, genero, anhoSalida, pc, xbox, playStation, sw, valoracion, tienda, favorito);
@@ -93,17 +105,13 @@ public class AnhadirJuego extends AppCompatActivity implements View.OnClickListe
                 Database db = new Database(this);
                 db.nuevoVideojuego(videojuego);
 
-                txNombreVideojuego.setText("");
-
                 onBackPressed();
                 break;
 
             case R.id.imgFotovideojuego:
                 Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, FOTO_TAREA);
-
                 break;
-
         }
     }
 

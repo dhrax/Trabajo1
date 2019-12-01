@@ -1,14 +1,17 @@
 package com.daisa.trabajo1;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -69,11 +72,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.menu_contextual_favorito, menu);
+
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+
+        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo(); //Nos dice dónde está un listView
+
+        final int posicion = menuInfo.position; //y esta
+
+        switch (item.getItemId()) {//  Qué item he pulsado
+            case R.id.itemFavorito:
+
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-
             case R.id.btAnhadirMain:
                 Intent intent = new Intent(this, AnhadirJuego.class);
                 startActivity(intent);
@@ -86,7 +111,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
         Intent intentMapa = new Intent(this, DetallesJuego.class);
 
-        //TODO poner el intent de la imagen
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         videojuegos.get(i).getImagen().compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] byteArray = stream.toByteArray();

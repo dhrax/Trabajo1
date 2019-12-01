@@ -6,8 +6,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 public class ListaVideojuegosAdapter extends FragmentPagerAdapter {
 
-    private final int PAGE_COUNT = 2;
-    private String tabTitles[] = new String[] {"Plataforma", "Tienda"};
+    private final int PAGE_COUNT = 4;
+    private String tabTitles[] = new String[] {"Plataforma", "Tienda", "Genero", "Desarrolladora"};
 
     public ListaVideojuegosAdapter(FragmentManager fm) {
         super(fm);
@@ -17,8 +17,12 @@ public class ListaVideojuegosAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         if (position == 0)
             return PlataformaFragment.newInstance(position + 1);
-        else
+        else if(position == 1)
             return TiendaFragment.newInstance(position + 1);
+        else if(position==3)
+            return GeneroFragment.newInstance(position + 1);
+        else
+            return DesarrolladoraFragment.newInstance(position + 1);
     }
 
 

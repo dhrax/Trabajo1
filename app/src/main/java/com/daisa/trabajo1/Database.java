@@ -97,6 +97,27 @@ public class Database extends SQLiteOpenHelper {
         return getLista(cursor);
     }
 
+    public ArrayList<Videojuego> getVideojuegosPlataforma(boolean pc, boolean xbox, boolean playStation, boolean sw){
+        SQLiteDatabase db = getReadableDatabase();
+        String[] plataformas = new String[]{String.valueOf(pc ? 1: 0), String.valueOf(xbox? 1: 0), String.valueOf(playStation? 1: 0), String.valueOf(sw? 1: 0)};
+        Cursor cursor =  db.query(TABLA_VIDEOJUEGOS, SELECT, "pc = ? and xbox = ? and playStation = ? and SW = ? ", plataformas, null, null, NOMBRE);
+        return getLista(cursor);
+    }
+
+    public ArrayList<Videojuego> getVideojuegosGenero(String genero){
+        SQLiteDatabase db = getReadableDatabase();
+        String[] generos = new String[]{genero};
+        Cursor cursor =  db.query(TABLA_VIDEOJUEGOS, SELECT, "genero = ? ", generos, null, null, NOMBRE);
+        return getLista(cursor);
+    }
+
+    public ArrayList<Videojuego> getVideojuegosDesarrolladora(String desarrolladora){
+        SQLiteDatabase db = getReadableDatabase();
+        String[] desarrolladoras = new String[]{desarrolladora};
+        Cursor cursor =  db.query(TABLA_VIDEOJUEGOS, SELECT, "genero = ? ", desarrolladoras, null, null, NOMBRE);
+        return getLista(cursor);
+    }
+
 
 
 

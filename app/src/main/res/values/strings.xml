@@ -14,9 +14,14 @@
     <string name="nombre">Nombre</string>
     <string name="volver">Volver</string>
     <string name="a_adir">Añadir</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ver_relacionados">Ver Relacionados</string>
+    <string name="desconocida">Desconocida</string>
+    <string name="desconocido">Desconocido</string>
+    <string name="DrpBtnPorDefecto">Seleccione</string>
 
     <string-array name="Desarrolladoras">
-        <item></item>
+        <item>Seleccione</item>
         <item>Nintendo</item>
         <item>Rockstar</item>
         <item>Ubisoft</item>
@@ -26,7 +31,7 @@
     </string-array>
 
     <string-array name="Generos">
-        <item></item>
+        <item>Seleccione</item>
         <item>MMO</item>
         <item>MOBA</item>
         <item>FPS</item>
@@ -37,7 +42,7 @@
 
 
     <string-array name="Tienda">
-        <item></item>
+        <item>Seleccione</item>
         <item>GAME</item>
         <item>FNAC</item>
         <item>GameStop</item>
@@ -45,9 +50,5 @@
         <item>Ebay</item>
         <item>AliExpress</item>
     </string-array>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
 
 </resources>

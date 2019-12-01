@@ -52,11 +52,11 @@ public class TiendaFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         videojuegos = new ArrayList<>();
-        ListView lvPlataforma = getView().findViewById(R.id.lvTiendas);
+        ListView lvTiendas = getView().findViewById(R.id.lvTiendas);
 
         adaptador= new VideojuegoAdapter(getActivity().getApplicationContext(), videojuegos);
-        lvPlataforma.setAdapter(adaptador);
-        registerForContextMenu(lvPlataforma);
+        lvTiendas.setAdapter(adaptador);
+        registerForContextMenu(lvTiendas);
     }
 
     @Override

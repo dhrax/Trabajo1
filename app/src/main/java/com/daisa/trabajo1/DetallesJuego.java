@@ -40,7 +40,7 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
         Button btVolver = findViewById(R.id.volver);
         Button btRelacionados = findViewById(R.id.relacionados);
 
-        //TODO poner el intent de la imagen
+
         byte[] byteArray = intent.getByteArrayExtra("imagen");
         Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 
@@ -82,10 +82,24 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
 
             case R.id.relacionados:
                 TextView txvTienda = findViewById(R.id.tiendaSeleccionada);
+                TextView txvgenero = findViewById(R.id.genero);
+
+                CheckBox chPC = findViewById(R.id.PC);
+                CheckBox chXbox = findViewById(R.id.xbox);
+                CheckBox chPlayStation = findViewById(R.id.playStation);
+                CheckBox chSw = findViewById(R.id.sw);
+
+                TextView txvdesarrolladora = findViewById(R.id.desarrolladora);
 
                 Intent intent = new Intent(this, Relacionados.class);
 
                 intent.putExtra("tienda", txvTienda.getText().toString());
+                intent.putExtra("pc", chPC.isChecked());
+                intent.putExtra("xbox", chXbox.isChecked());
+                intent.putExtra("playStation", chPlayStation.isChecked());
+                intent.putExtra("sw", chSw.isChecked());
+                intent.putExtra("genero", txvgenero.getText().toString());
+                intent.putExtra("desarrolladora", txvdesarrolladora.getText().toString());
 
                 startActivity(intent);
                 break;

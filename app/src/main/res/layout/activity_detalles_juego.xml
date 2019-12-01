@@ -81,28 +81,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/pc" />
+            android:text="@string/pc"
+            android:clickable="false"/>
 
         <CheckBox
             android:id="@+id/xbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/xbox" />
+            android:text="@string/xbox"
+            android:clickable="false"/>
 
         <CheckBox
             android:id="@+id/playStation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/playstation" />
+            android:text="@string/playstation"
+            android:clickable="false"/>
 
         <CheckBox
             android:id="@+id/sw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/NS" />
+            android:text="@string/NS"
+            android:clickable="false"/>
     </LinearLayout>
 
     <LinearLayout
@@ -116,7 +120,8 @@
         <RatingBar
             android:id="@+id/valoracion"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:isIndicator="true"/>
     </LinearLayout>
 
     <LinearLayout
@@ -159,7 +164,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Ver Relacionados" />
+            android:text="@string/ver_relacionados" />
 
     </LinearLayout>
 
@@ -176,6 +181,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/favorito" />
+            android:text="@string/favorito"
+            android:clickable="false"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

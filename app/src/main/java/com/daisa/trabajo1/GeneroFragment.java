@@ -10,32 +10,26 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 
-public class PlataformaFragment extends Fragment {
+public class GeneroFragment extends Fragment {
 
     private ArrayList<Videojuego> videojuegos;
     private VideojuegoAdapter adaptador;
-    private static boolean pc;
-    private static boolean xbox;
-    private static boolean playStation;
-    private static boolean sw;
+    private static String genero;
 
-    public PlataformaFragment(boolean pc, boolean xbox, boolean playStation, boolean sw) {
-        this.pc = pc;
-        this.xbox = xbox;
-        this.playStation = playStation;
-        this.sw = sw;
+    public GeneroFragment(String genero) {
+        this.genero = genero;
     }
 
-    public static PlataformaFragment newInstance(int position) {
+    public static GeneroFragment newInstance(int position) {
+
         Bundle args = new Bundle();
         args.putInt("position", position);
-        PlataformaFragment fragment = new PlataformaFragment(pc, xbox, playStation, sw);
+        GeneroFragment fragment = new GeneroFragment(genero);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,21 +44,21 @@ public class PlataformaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_plataforma, container, false);
+        View view = inflater.inflate(R.layout.fragment_genero, container, false);
         return view;
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         videojuegos = new ArrayList<>();
-        ListView lvPlataforma = getView().findViewById(R.id.lvPlataforma);
+        ListView lvGenero = getView().findViewById(R.id.lvGenero);
 
         adaptador= new VideojuegoAdapter(getActivity().getApplicationContext(), videojuegos);
-        lvPlataforma.setAdapter(adaptador);
-        registerForContextMenu(lvPlataforma);
+        lvGenero.setAdapter(adaptador);
+        registerForContextMenu(lvGenero);
     }
 
     @Override
@@ -72,8 +66,7 @@ public class PlataformaFragment extends Fragment {
         super.onResume();
         Database db = new Database(getActivity().getApplicationContext());
         videojuegos.clear();
-        videojuegos.addAll(db.getVideojuegosPlataforma(pc, xbox, playStation, sw));
+        videojuegos.addAll(db.getVideojuegosGenero(genero));
         adaptador.notifyDataSetChanged();
     }
-
 }
