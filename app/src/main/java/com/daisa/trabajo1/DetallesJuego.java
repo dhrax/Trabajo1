@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DetallesJuego extends AppCompatActivity implements View.OnClickListener {
 
@@ -39,7 +41,9 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
         Button btRelacionados = findViewById(R.id.relacionados);
 
         //TODO poner el intent de la imagen
-        //Bitmap imagen = intent.getB
+        byte[] byteArray = intent.getByteArrayExtra("imagen");
+        Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+
         String nombre = intent.getStringExtra("nombre");
         String desarrolladora = intent.getStringExtra("desarrolladora");
         String genero = intent.getStringExtra("genero");
@@ -52,7 +56,7 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
         String tienda = intent.getStringExtra("tienda");
         boolean favorito = intent.getBooleanExtra("favorito", false);
 
-        //imagen.setImageBitMap();
+        imgImagen.setImageBitmap(bmp);
         txvNombre.setText(nombre);
         txvdesarrolladora.setText(desarrolladora);
         txvgenero.setText(genero);
@@ -72,11 +76,18 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btVolver:
+            case R.id.volver:
                 onBackPressed();
                 break;
 
             case R.id.relacionados:
+                TextView txvTienda = findViewById(R.id.tiendaSeleccionada);
+
+                Intent intent = new Intent(this, Relacionados.class);
+
+                intent.putExtra("tienda", txvTienda.getText().toString());
+
+                startActivity(intent);
                 break;
 
         }

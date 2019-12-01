@@ -28,7 +28,7 @@ public class Database extends SQLiteOpenHelper {
 
     private static final int VERSION = 1;
     private final String[] SELECT = new String[] {_ID, NOMBRE, DESARROLLADORA, GENERO, ANHOSALIDA, PC, XBOX, PLASTATION, SW, VALORACION, TIENDA, FAVORITO, IMAGEN};
-
+    //private final String[] tiendas = new String[]{"GAME"};
 
     public Database(Context context) {
         super(context, BBDD, null, VERSION);
@@ -89,6 +89,15 @@ public class Database extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLA_VIDEOJUEGOS, SELECT, null, null, null, null, NOMBRE);
         return getLista(cursor);
     }
+
+    public ArrayList<Videojuego> getVideojuegosTienda(String tienda){
+        SQLiteDatabase db = getReadableDatabase();
+        String[] tiendas = new String[]{tienda};
+        Cursor cursor =  db.query(TABLA_VIDEOJUEGOS, SELECT, "tienda = ? ", tiendas, null, null, NOMBRE);
+        return getLista(cursor);
+    }
+
+
 
 
 

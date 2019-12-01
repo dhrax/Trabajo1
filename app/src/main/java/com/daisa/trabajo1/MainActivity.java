@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
@@ -85,7 +87,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intentMapa = new Intent(this, DetallesJuego.class);
 
         //TODO poner el intent de la imagen
-        //intentMapa.putExtra("imagen", videojuegos.get(i).getImagen());
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        videojuegos.get(i).getImagen().compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+
+        intentMapa.putExtra("imagen", byteArray);
         intentMapa.putExtra("nombre", videojuegos.get(i).getNombre());
         intentMapa.putExtra("desarrolladora", videojuegos.get(i).getDesarrolladora());
         intentMapa.putExtra("genero", videojuegos.get(i).getGenero());
