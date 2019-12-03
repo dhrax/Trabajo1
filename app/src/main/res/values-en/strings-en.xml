@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GameList</string>
+    <string name="tienda">Shop</string>
+    <string name="favorito">Favorite</string>
+    <string name="valoraci_n">Rating</string>
+    <string name="NS">Switch</string>
+    <string name="playstation">PlayStation</string>
+    <string name="xbox">XBOX</string>
+    <string name="pc">PC</string>
+    <string name="plataforma">Platform</string>
+    <string name="anho_salida">Release year</string>
+    <string name="genero">Genre</string>
+    <string name="desarrolladora">Developer</string>
+    <string name="nombre">Name</string>
+    <string name="volver">Back</string>
+    <string name="a_adir">Add</string>
+    <string name="ver_relacionados">Related</string>
+    <string name="desconocida">Unknown</string>
+    <string name="desconocido">Unknown</string>
+    <string name="DrpBtnPorDefecto">Select</string>
+    <string name="borrarVideojuegoQ">Delete game?</string>
+    <string name="borrar">Delete</string>
+    <string name="si">Yes</string>
+    <string name="no">No</string>
+    <string name="cerrar">Close</string>
+    <string name="descDetalles">This app will let you save your favorite games or your next purchases very easily</string>
+    <string name="acercaDe">About GameList:</string>
+    <string name="gameList">GameList</string>
+    <string name="anhadirJuego">Add game</string>
+    <string name="nombreObligatorio">Game must be named</string>
+    <string name="fechaTieneQueSerNumero">Release year must be a number</string>
+    <string name="fechaMayorQue">Release year mut be at least </string>
+    <string name="fechaDesconocida">\????</string>
+    <string name="detallesJuego">Game Details</string>
+    <string name="relacionados">Related</string>
+    <string name="anhadir">Add</string>
+
+    <string-array name="Desarrolladoras">
+        <item>Select</item>
+        <item>Nintendo</item>
+        <item>Rockstar</item>
+        <item>Ubisoft</item>
+        <item>Sony</item>
+        <item>EA</item>
+        <item>Valve</item>
+    </string-array>
+
+    <string-array name="Generos">
+        <item>Select</item>
+        <item>MMO</item>
+        <item>MOBA</item>
+        <item>FPS</item>
+        <item>Simulation</item>
+        <item>RPG</item>
+        <item>Fighting</item>
+    </string-array>
+
+
+    <string-array name="Tienda">
+        <item>Select</item>
+        <item>GAME</item>
+        <item>FNAC</item>
+        <item>GameStop</item>
+        <item>Amazon</item>
+        <item>Ebay</item>
+        <item>AliExpress</item>
+    </string-array>
+
+</resources>

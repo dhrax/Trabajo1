@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.setTitle(R.string.gameList);
 
         Button btAnhadirMain = findViewById(R.id.btAnhadirMain);
         btAnhadirMain.setOnClickListener(this);
@@ -66,8 +67,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Intent intent = new Intent(this, AnhadirJuego.class);
-        startActivity(intent);
+        switch (item.getItemId()){
+            case R.id.itemDetalles:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage(getString(R.string.descDetalles)).setTitle(getString(R.string.acercaDe))
+                        .setNegativeButton(getString(R.string.cerrar),
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }});
+
+                builder.create().show();
+                break;
+            case R.id.actionNuevoVideojuego:
+                Intent intent = new Intent(this, AnhadirJuego.class);
+                startActivity(intent);
+                break;
+        }
+
+
 
         return true;
     }
@@ -88,7 +107,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (item.getItemId()) {//  Qué item he pulsado
             case R.id.itemFavorito:
+                Videojuego videojuego = videojuegos.get(posicion);
+                videojuego.favorito();
+                Database db = new Database(this);
+                db.videojuegoFavorito(videojuego);
+                adaptador.notifyDataSetChanged();
+                return true;
+            case R.id.itemBorrar:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage(getString(R.string.borrarVideojuegoQ)).setTitle(getString(R.string.borrar))
+                        .setPositiveButton(getString(R.string.si),
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // Qué hacer si el usuario pulsa "Si"
+                                        Videojuego videojuegoEliminado = videojuegos.remove(posicion);
 
+                                        Database db = new Database(getApplicationContext());
+                                        db.borrarVideojuego(videojuegoEliminado);
+                                        adaptador.notifyDataSetChanged();
+                                        dialog.dismiss();
+                                    }})
+                        .setNegativeButton(getString(R.string.no),
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // Qué hacer si el usuario pulsa "No"
+                                        // En este caso se cierra directamente el diálogo y no se hace nada más
+                                        dialog.dismiss();
+                                    }});
+
+                builder.create().show();
                 return true;
             default:
                 return super.onContextItemSelected(item);

@@ -4,4 +4,7 @@
     <item
         android:id="@+id/itemFavorito"
         android:title="@string/favorito" />
+    <item
+        android:id="@+id/itemBorrar"
+        android:title="Borrar" />
 </menu>

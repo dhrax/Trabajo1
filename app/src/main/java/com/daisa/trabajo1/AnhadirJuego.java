@@ -30,7 +30,7 @@ public class AnhadirJuego extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anhadir_juego);
-
+        this.setTitle(R.string.anhadirJuego);
         Button btVolver = findViewById(R.id.btVolver);
         Button btAnhadir = findViewById(R.id.btAnhadirMain);
         ImageView imgFotovideojuego = findViewById(R.id.imgFotovideojuego);
@@ -64,28 +64,28 @@ public class AnhadirJuego extends AppCompatActivity implements View.OnClickListe
 
                 String nombre = txNombreVideojuego.getText().toString();
                 if (nombre.equals("")) {
-                    Toast.makeText(this, "Tiene que añadir un nombre para añadir el videojuego", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.nombreObligatorio), Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 Bitmap imagen = ((BitmapDrawable) imgFotovideojuego.getDrawable()).getBitmap();
 
                 String desarrolladora = drpbtDesarrollador.getSelectedItem().toString();
-                if(desarrolladora.equals(String.valueOf(R.string.DrpBtnPorDefecto)))
-                    desarrolladora=String.valueOf(R.string.desconocida);
+                if(desarrolladora.equals(getString(R.string.DrpBtnPorDefecto)))
+                    desarrolladora=getString(R.string.desconocida);
 
                 String genero = drpbtGenero.getSelectedItem().toString();
-                if(genero.equals(String.valueOf(R.string.DrpBtnPorDefecto)))
-                    genero=String.valueOf(R.string.desconocido);
+                if(genero.equals(getString(R.string.DrpBtnPorDefecto)))
+                    genero=getString(R.string.desconocido);
 
                 String anhoSalida = txAnhoSalida.getText().toString();
                 if (anhoSalida.equals(""))
-                    anhoSalida="????";
+                    anhoSalida=getString(R.string.fechaDesconocida);
                 else if(!Util.isNumeric(anhoSalida)){
-                    Toast.makeText(this, "La fecha de salida tiene que ser un número entero", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.fechaTieneQueSerNumero), Toast.LENGTH_LONG).show();
                     return;
                 }else if(!Util.fechaValida(anhoSalida)){
-                    Toast.makeText(this, "La fecha de salida tiene que ser un mayor o igual a "+Util.FECHA_PRIMER_VIDEOJUEO, Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.fechaMayorQue)+Util.FECHA_PRIMER_VIDEOJUEO, Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -95,8 +95,8 @@ public class AnhadirJuego extends AppCompatActivity implements View.OnClickListe
                 boolean sw = swSwitch.isChecked();
                 float valoracion = rtValoracion.getRating();
                 String tienda = drpbtTienda.getSelectedItem().toString();
-                if(tienda.equals(String.valueOf(R.string.DrpBtnPorDefecto)))
-                    tienda=String.valueOf(R.string.desconocida);
+                if(tienda.equals(getString(R.string.DrpBtnPorDefecto)))
+                    tienda=getString(R.string.desconocida);
 
                 boolean favorito =swFavorito.isChecked();
 
@@ -114,9 +114,6 @@ public class AnhadirJuego extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

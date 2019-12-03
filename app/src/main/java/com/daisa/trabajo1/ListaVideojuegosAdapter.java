@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 public class ListaVideojuegosAdapter extends FragmentPagerAdapter {
 
     private final int PAGE_COUNT = 4;
-    private String tabTitles[] = new String[] {"Plataforma", "Tienda", "Genero", "Desarrolladora"};
+    private String tabTitles[] = new String[] {"plataforma", "Tienda", "Genero", "Desarrolladora"};
 
     public ListaVideojuegosAdapter(FragmentManager fm) {
         super(fm);

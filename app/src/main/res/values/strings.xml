@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Trabajo1</string>
+    <string name="app_name">GameList</string>
     <string name="tienda">Tienda</string>
     <string name="favorito">Favorito</string>
     <string name="valoraci_n">Valoración</string>
@@ -14,11 +14,26 @@
     <string name="nombre">Nombre</string>
     <string name="volver">Volver</string>
     <string name="a_adir">Añadir</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="ver_relacionados">Ver Relacionados</string>
     <string name="desconocida">Desconocida</string>
     <string name="desconocido">Desconocido</string>
     <string name="DrpBtnPorDefecto">Seleccione</string>
+    <string name="borrarVideojuegoQ">¿Quiere borrar el videojuego?</string>
+    <string name="borrar">Borrar</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
+    <string name="cerrar">Cerrar</string>
+    <string name="descDetalles">Esta aplicacion te servirá para poder guardar tus videojuegos favoritos y/o tus próximas compras de una manera sencilla y útil</string>
+    <string name="acercaDe">Acerca de GameList:</string>
+    <string name="gameList">GameList</string>
+    <string name="anhadirJuego">Añadir juego</string>
+    <string name="nombreObligatorio">El videojuego tiene que tener nombre</string>
+    <string name="fechaTieneQueSerNumero">La fecha de salida tiene que ser un número entero</string>
+    <string name="fechaMayorQue">La fecha de salida tiene que ser un mayor o igual a</string>
+    <string name="fechaDesconocida">\????</string>
+    <string name="detallesJuego">Detalles del juego</string>
+    <string name="relacionados">Relacionados</string>
+    <string name="anhadir">Añadir</string>
 
     <string-array name="Desarrolladoras">
         <item>Seleccione</item>

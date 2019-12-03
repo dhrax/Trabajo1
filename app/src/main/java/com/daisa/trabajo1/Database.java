@@ -118,6 +118,25 @@ public class Database extends SQLiteOpenHelper {
         return getLista(cursor);
     }
 
+    public void videojuegoFavorito(Videojuego videojuego) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(NOMBRE, videojuego.getNombre());
+        values.put(FAVORITO, videojuego.isFavorito());
+        String[] argumentos = new String[]{String.valueOf(videojuego.getID())};
+        db.update(TABLA_VIDEOJUEGOS, values, "_id = ?", argumentos);
+        db.close();
+    }
+
+    public void borrarVideojuego(Videojuego videojuego){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String[] argumentos = new String[]{String.valueOf(videojuego.getID())};
+        db.delete(TABLA_VIDEOJUEGOS, "_id = ?", argumentos);
+        db.close();
+    }
+
 
 
 

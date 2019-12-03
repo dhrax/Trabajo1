@@ -152,6 +152,9 @@ public class Videojuego {
         this.favorito = favorito;
     }
 
+    public void favorito(){
+        this.favorito=!this.favorito;
+    }
     @Override
     public String toString(){
         return nombre;

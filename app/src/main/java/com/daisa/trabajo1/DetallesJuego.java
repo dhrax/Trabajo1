@@ -21,7 +21,7 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles_juego);
-
+        this.setTitle(R.string.detallesJuego);
         Intent intent = getIntent();
 
         ImageView imgImagen = findViewById(R.id.imagenVideojuego);

@@ -16,7 +16,7 @@ public class Relacionados extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relacionados);
-
+        this.setTitle(R.string.relacionados);
         ViewPager view = findViewById(R.id.view);
         view.setAdapter(new ListaVideojuegosAdapter(getSupportFragmentManager()));
 
