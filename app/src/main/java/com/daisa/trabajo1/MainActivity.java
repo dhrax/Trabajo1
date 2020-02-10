@@ -25,8 +25,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
-    private ArrayList<Videojuego> videojuegos;
-    private VideojuegoAdapter adaptador;
+    public static ArrayList<Videojuego> videojuegos;
+    public static VideojuegoAdapter adaptador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +49,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+        /*if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
 
         Database db = new Database(this);
+        videojuegos.addAll(db.getVideojuegos());*/
         videojuegos.clear();
-        videojuegos.addAll(db.getVideojuegos());
+
         adaptador.notifyDataSetChanged();
+
+        cargarListaMonumentos();
+
+    }
+
+    private void cargarListaMonumentos() {
+
+        TareaDescargaDatos tarea = new TareaDescargaDatos(this);
+        tarea.execute(Constantes.URL);
     }
 
     @Override
@@ -161,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intentMapa = new Intent(this, DetallesJuego.class);
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        videojuegos.get(i).getImagen().compress(Bitmap.CompressFormat.PNG, 100, stream);
+        //videojuegos.get(i).getImagen().compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] byteArray = stream.toByteArray();
 
         intentMapa.putExtra("imagen", byteArray);
