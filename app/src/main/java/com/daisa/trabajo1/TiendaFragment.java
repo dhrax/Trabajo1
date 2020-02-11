@@ -62,9 +62,10 @@ public class TiendaFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Database db = new Database(getActivity().getApplicationContext());
         videojuegos.clear();
-        videojuegos.addAll(db.getVideojuegosTienda(tienda));
         adaptador.notifyDataSetChanged();
+
+        TareaDescargaDatos tarea = new TareaDescargaDatos(getActivity(), videojuegos, adaptador);
+        tarea.execute(Constantes.URL+"videojuegosTienda?tienda="+tienda);
     }
 }

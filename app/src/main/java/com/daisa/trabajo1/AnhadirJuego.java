@@ -101,9 +101,10 @@ public class AnhadirJuego extends AppCompatActivity implements View.OnClickListe
                 boolean favorito =swFavorito.isChecked();
 
                 Videojuego videojuego = new Videojuego(nombre, desarrolladora, genero, anhoSalida, pc, xbox, playStation, sw, valoracion, tienda, favorito);
-                videojuego.setImagen(imagen);
-                Database db = new Database(this);
-                db.nuevoVideojuego(videojuego);
+                //videojuego.setImagen(imagen);
+
+                TareaAñadeDatos tareaAñadeDatos = new TareaAñadeDatos(this, videojuego);
+                tareaAñadeDatos.execute(Constantes.URL+"add_videojuego");
 
                 onBackPressed();
                 break;

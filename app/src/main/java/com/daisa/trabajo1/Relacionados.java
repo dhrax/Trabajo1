@@ -38,9 +38,13 @@ public class Relacionados extends AppCompatActivity implements View.OnClickListe
 
         String desarrolladora = intent.getStringExtra("desarrolladora");
 
-        new TiendaFragment(tienda);
 
         new PlataformaFragment(pc, xbox, playStation, sw);
+
+
+        new TiendaFragment(tienda);
+
+
 
         new GeneroFragment(genero);
 

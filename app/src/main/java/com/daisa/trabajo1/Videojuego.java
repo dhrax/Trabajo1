@@ -18,7 +18,7 @@ public class Videojuego {
     private String tienda;
     private boolean favorito;
 
-    Videojuego(String nombre, String desarrolladora, String genero, String anhoSalida, boolean PC, boolean xbox, boolean playStation, boolean SW, float valoracion, String tienda,
+    public Videojuego(String nombre, String desarrolladora, String genero, String anhoSalida, boolean PC, boolean xbox, boolean playStation, boolean SW, float valoracion, String tienda,
                 boolean favorito){
         this.nombre = nombre;
         this.desarrolladora = desarrolladora;
@@ -33,7 +33,7 @@ public class Videojuego {
         this.favorito = favorito;
     }
 
-    Videojuego(float ID, String nombre, String desarrolladora, String genero, String anhoSalida, boolean PC, boolean xbox, boolean playStation, boolean SW, float valoracion, String tienda,
+    public Videojuego(float ID, String nombre, String desarrolladora, String genero, String anhoSalida, boolean PC, boolean xbox, boolean playStation, boolean SW, float valoracion, String tienda,
                boolean favorito){
         this.ID=ID;
         this.nombre = nombre;
@@ -48,6 +48,8 @@ public class Videojuego {
         this.tienda = tienda;
         this.favorito = favorito;
     }
+
+    public Videojuego(){}
 
     public Bitmap getImagen() {
         return imagen;

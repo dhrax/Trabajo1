@@ -28,7 +28,6 @@ public class Database extends SQLiteOpenHelper {
 
     private static final int VERSION = 1;
     private final String[] SELECT = new String[] {_ID, NOMBRE, DESARROLLADORA, GENERO, ANHOSALIDA, PC, XBOX, PLASTATION, SW, VALORACION, TIENDA, FAVORITO, IMAGEN};
-    //private final String[] tiendas = new String[]{"GAME"};
 
     public Database(Context context) {
         super(context, BBDD, null, VERSION);
@@ -136,11 +135,5 @@ public class Database extends SQLiteOpenHelper {
         db.delete(TABLA_VIDEOJUEGOS, "_id = ?", argumentos);
         db.close();
     }
-
-
-
-
-
-
 
 }

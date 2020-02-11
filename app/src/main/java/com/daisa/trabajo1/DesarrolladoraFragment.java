@@ -61,9 +61,10 @@ public class DesarrolladoraFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Database db = new Database(getActivity().getApplicationContext());
         videojuegos.clear();
-        videojuegos.addAll(db.getVideojuegosDesarrolladora(desarrolladora));
         adaptador.notifyDataSetChanged();
+
+        TareaDescargaDatos tarea = new TareaDescargaDatos(getActivity(), videojuegos, adaptador);
+        tarea.execute(Constantes.URL+"videojuegosDesarrolladora?desarrolladora="+desarrolladora);
     }
 }

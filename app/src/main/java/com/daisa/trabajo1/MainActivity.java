@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
-    public static ArrayList<Videojuego> videojuegos;
+    public static ArrayList<Videojuego> videojuegos = new ArrayList<>();
     public static VideojuegoAdapter adaptador;
 
     @Override
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button btAnhadirMain = findViewById(R.id.btAnhadirMain);
         btAnhadirMain.setOnClickListener(this);
 
-        videojuegos = new ArrayList<>();
+
         ListView lvVideojuego = findViewById(R.id.lvVideojuego);
         adaptador = new VideojuegoAdapter(this, videojuegos);
         lvVideojuego.setAdapter(adaptador);
@@ -51,9 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onResume();
         /*if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-
-        Database db = new Database(this);
-        videojuegos.addAll(db.getVideojuegos());*/
+        */
         videojuegos.clear();
 
         adaptador.notifyDataSetChanged();
@@ -64,8 +62,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void cargarListaMonumentos() {
 
-        TareaDescargaDatos tarea = new TareaDescargaDatos(this);
-        tarea.execute(Constantes.URL);
+        TareaDescargaDatos tarea = new TareaDescargaDatos(this, videojuegos, adaptador);
+        tarea.execute(Constantes.URL+"videojuegos");
     }
 
     @Override

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,8 @@ import java.util.ArrayList;
 
 public class GeneroFragment extends Fragment {
 
-    private ArrayList<Videojuego> videojuegos;
-    private VideojuegoAdapter adaptador;
+    private ArrayList<Videojuego> videojuegos = new ArrayList<>();
+    public static VideojuegoAdapter adaptador;
     private static String genero;
 
     public GeneroFragment(String genero) {
@@ -53,10 +54,9 @@ public class GeneroFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        videojuegos = new ArrayList<>();
         ListView lvGenero = getView().findViewById(R.id.lvGenero);
 
-        adaptador= new VideojuegoAdapter(getActivity().getApplicationContext(), videojuegos);
+        adaptador= new VideojuegoAdapter(getActivity(), videojuegos);
         lvGenero.setAdapter(adaptador);
         registerForContextMenu(lvGenero);
     }
@@ -64,9 +64,12 @@ public class GeneroFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Database db = new Database(getActivity().getApplicationContext());
+
         videojuegos.clear();
-        videojuegos.addAll(db.getVideojuegosGenero(genero));
         adaptador.notifyDataSetChanged();
+        TareaDescargaDatos tarea = new TareaDescargaDatos(getActivity(), videojuegos, adaptador);
+
+        tarea.execute(Constantes.URL+"videojuegosGenero?genero="+genero);
+
     }
 }
