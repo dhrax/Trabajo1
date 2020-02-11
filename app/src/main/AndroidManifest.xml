@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Relacionados"></activity>
+        <activity android:name=".AnhadirOpinion"></activity>
+        <activity android:name=".Relacionados" />
         <activity android:name=".DetallesJuego" />
         <activity android:name=".AnhadirJuego" />
         <activity android:name=".MainActivity">

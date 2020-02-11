@@ -13,8 +13,6 @@ import java.net.URL;
 
 public class TareaAñadeDatos extends AsyncTask<String, Void, Void> {
     Videojuego videojuego;
-    private boolean error = false;
-    private ProgressDialog dialog;
     Activity act;
 
     public TareaAñadeDatos(Activity act, Videojuego videojuego) {
@@ -46,7 +44,6 @@ public class TareaAñadeDatos extends AsyncTask<String, Void, Void> {
                     "&valoracion=" + valoracion + "&tienda=" + tienda + "&favorito=" + favorito, Void.class);
         } catch (IOException ioe) {
             ioe.printStackTrace();
-            error = true;
             Log.d("DAVID ERROR", ioe.getMessage());
         }
 

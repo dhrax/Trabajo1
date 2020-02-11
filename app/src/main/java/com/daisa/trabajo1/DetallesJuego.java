@@ -13,7 +13,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class DetallesJuego extends AppCompatActivity implements View.OnClickListener {
 
@@ -37,7 +38,7 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
         TextView txvTienda = findViewById(R.id.tiendaSeleccionada);
         Switch swFavorito = findViewById(R.id.favorito);
 
-        Button btVolver = findViewById(R.id.volver);
+        Button btVolver = findViewById(R.id.btAnhadirOpinion);
         Button btRelacionados = findViewById(R.id.relacionados);
 
 
@@ -76,8 +77,17 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.volver:
-                onBackPressed();
+            case R.id.btAnhadirOpinion:
+                Intent intentOpinion = new Intent(this, AnhadirOpinion.class);
+
+                TextView txvNombre = findViewById(R.id.nombre);
+                TextView txvdesarrolladora = findViewById(R.id.desarrolladora);
+                RatingBar rtValoracion = findViewById(R.id.valoracion);
+
+                intentOpinion.putExtra("nombre", txvNombre.getText().toString());
+                intentOpinion.putExtra("desarrolladora", txvdesarrolladora.getText().toString());
+                intentOpinion.putExtra("valoracion", rtValoracion.getRating());
+                startActivity(intentOpinion);
                 break;
 
             case R.id.relacionados:
@@ -89,7 +99,7 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
                 CheckBox chPlayStation = findViewById(R.id.playStation);
                 CheckBox chSw = findViewById(R.id.sw);
 
-                TextView txvdesarrolladora = findViewById(R.id.desarrolladora);
+                txvdesarrolladora = findViewById(R.id.desarrolladora);
 
                 Intent intent = new Intent(this, Relacionados.class);
 

@@ -153,11 +153,11 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <Button
-            android:id="@+id/volver"
+            android:id="@+id/btAnhadirOpinion"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/volver" />
+            android:text="AÑADIR OPINION" />
 
         <Button
             android:id="@+id/relacionados"
