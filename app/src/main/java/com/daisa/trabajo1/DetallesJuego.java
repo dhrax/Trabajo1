@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,9 +15,22 @@ import android.widget.RatingBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class DetallesJuego extends AppCompatActivity implements View.OnClickListener {
+
+    public Videojuego videojuego = new Videojuego();
+
+    ImageView imgImagen;
+    TextView txvNombre;
+    TextView txvdesarrolladora;
+    TextView txvgenero;
+    TextView txvanhoSalida;
+    CheckBox chPC;
+    CheckBox chXbox;
+    CheckBox chPlayStation;
+    CheckBox chSw;
+    RatingBar rtValoracion;
+    TextView txvTienda;
+    Switch swFavorito;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,27 +39,27 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
         this.setTitle(R.string.detallesJuego);
         Intent intent = getIntent();
 
-        ImageView imgImagen = findViewById(R.id.imagenVideojuego);
-        TextView txvNombre = findViewById(R.id.nombre);
-        TextView txvdesarrolladora = findViewById(R.id.desarrolladora);
-        TextView txvgenero = findViewById(R.id.genero);
-        TextView txvanhoSalida = findViewById(R.id.anhoSalida);
-        CheckBox chPC = findViewById(R.id.PC);
-        CheckBox chXbox = findViewById(R.id.xbox);
-        CheckBox chPlayStation = findViewById(R.id.playStation);
-        CheckBox chSw = findViewById(R.id.sw);
-        RatingBar rtValoracion = findViewById(R.id.valoracion);
-        TextView txvTienda = findViewById(R.id.tiendaSeleccionada);
-        Switch swFavorito = findViewById(R.id.favorito);
+        imgImagen = findViewById(R.id.imagenVideojuego);
+        txvNombre = findViewById(R.id.nombre);
+        txvdesarrolladora = findViewById(R.id.desarrolladora);
+        txvgenero = findViewById(R.id.genero);
+        txvanhoSalida = findViewById(R.id.anhoSalida);
+        chPC = findViewById(R.id.PC);
+        chXbox = findViewById(R.id.xbox);
+        chPlayStation = findViewById(R.id.playStation);
+        chSw = findViewById(R.id.sw);
+        rtValoracion = findViewById(R.id.valoracion);
+        txvTienda = findViewById(R.id.tiendaSeleccionada);
+        swFavorito = findViewById(R.id.favorito);
 
         Button btVolver = findViewById(R.id.btAnhadirOpinion);
         Button btRelacionados = findViewById(R.id.relacionados);
-
 
         byte[] byteArray = intent.getByteArrayExtra("imagen");
         Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 
         String nombre = intent.getStringExtra("nombre");
+
         String desarrolladora = intent.getStringExtra("desarrolladora");
         String genero = intent.getStringExtra("genero");
         String anhoSalida = intent.getStringExtra("anhoSalida");
@@ -57,7 +71,10 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
         String tienda = intent.getStringExtra("tienda");
         boolean favorito = intent.getBooleanExtra("favorito", false);
 
+        //TareaDescargaDatos tarea = new TareaDescargaDatos(this, videojuego);
+        //tarea.execute(Constantes.URL+"videojuegosNombre?nombre="+nombre);
         imgImagen.setImageBitmap(bmp);
+
         txvNombre.setText(nombre);
         txvdesarrolladora.setText(desarrolladora);
         txvgenero.setText(genero);
@@ -70,6 +87,7 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
         txvTienda.setText(tienda);
         swFavorito.setChecked(favorito);
 
+
         btVolver.setOnClickListener(this);
         btRelacionados.setOnClickListener(this);
     }
@@ -78,7 +96,7 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btAnhadirOpinion:
-                Intent intentOpinion = new Intent(this, AnhadirOpinion.class);
+                /*Intent intentOpinion = new Intent(this, AnhadirOpinion.class);
 
                 TextView txvNombre = findViewById(R.id.nombre);
                 TextView txvdesarrolladora = findViewById(R.id.desarrolladora);
@@ -87,6 +105,9 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
                 intentOpinion.putExtra("nombre", txvNombre.getText().toString());
                 intentOpinion.putExtra("desarrolladora", txvdesarrolladora.getText().toString());
                 intentOpinion.putExtra("valoracion", rtValoracion.getRating());
+                startActivity(intentOpinion);
+                 */
+                Intent intentOpinion = new Intent(this, Mapa.class);
                 startActivity(intentOpinion);
                 break;
 
@@ -116,4 +137,5 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
 
         }
     }
+
 }

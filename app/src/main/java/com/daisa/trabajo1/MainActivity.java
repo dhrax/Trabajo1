@@ -185,6 +185,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         intentMapa.putExtra("tienda", videojuegos.get(i).getTienda());
         intentMapa.putExtra("favorito", videojuegos.get(i).isFavorito());
 
+
         startActivity(intentMapa);
     }
 }

@@ -157,11 +157,23 @@ public class Videojuego {
     public void favorito(){
         this.favorito=!this.favorito;
     }
+
     @Override
-    public String toString(){
-        return nombre;
+    public String toString() {
+        return "Videojuego{" +
+                "ID=" + ID +
+                ", imagen=" + imagen +
+                ", nombre='" + nombre + '\'' +
+                ", desarrolladora='" + desarrolladora + '\'' +
+                ", genero='" + genero + '\'' +
+                ", anhoSalida='" + anhoSalida + '\'' +
+                ", PC=" + PC +
+                ", xbox=" + xbox +
+                ", playStation=" + playStation +
+                ", SW=" + SW +
+                ", valoracion=" + valoracion +
+                ", tienda='" + tienda + '\'' +
+                ", favorito=" + favorito +
+                '}';
     }
-
-
-
 }

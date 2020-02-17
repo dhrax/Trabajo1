@@ -20,6 +20,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.Semaphore;
 
 public class TareaDescargaDatos extends AsyncTask<String, Void, Void>{
 
@@ -28,46 +29,56 @@ public class TareaDescargaDatos extends AsyncTask<String, Void, Void>{
     private Activity act;
     ArrayList arrayList;
     VideojuegoAdapter adapter;
+    //private boolean multipleVideojuego;
+    //Videojuego videojuego;
+    //DetallesJuego detalles;
 
-    TareaDescargaDatos(Activity act, ArrayList arrayList, VideojuegoAdapter adapter){
+    public TareaDescargaDatos(Activity act, ArrayList arrayList, VideojuegoAdapter adapter){
         this.act = act;
         this.arrayList = arrayList;
         this.adapter = adapter;
+        //multipleVideojuego = true;
     }
-
-    /**
-     * Método que ejecuta la tarea en segundo plano
-     * @param params
-     * @return
-     */
+    /*
+    public TareaDescargaDatos(Activity act, Videojuego videojuego){
+        this.act = act;
+        this.videojuego = videojuego;
+        multipleVideojuego = false;
+        this.detalles = new DetallesJuego();
+    }
+    */
     @Override
     protected Void doInBackground(String... params) {
 
-        String urlParam = params[0];
+        String url = params[0];
 
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-            Videojuego[] opinionesArray = restTemplate.getForObject(urlParam, Videojuego[].class);
-            arrayList.addAll(Arrays.asList(opinionesArray));
+            Videojuego[] opinionesArray = restTemplate.getForObject(url, Videojuego[].class);
+            //if(multipleVideojuego)
+                arrayList.addAll(Arrays.asList(opinionesArray));
+            /*else{
+                this.videojuego = opinionesArray[0];
+            }
+             */
+
 
         return null;
 
     }
 
-
     @Override
     protected void onCancelled() {
         super.onCancelled();
-        arrayList = new ArrayList<>();
+        //if(multipleVideojuego)
+            arrayList = new ArrayList<>();
     }
-
 
     @Override
     protected void onProgressUpdate(Void... progreso) {
         super.onProgressUpdate(progreso);
         adapter.notifyDataSetChanged();
     }
-
 
     @Override
     protected void onPreExecute() {
@@ -91,7 +102,13 @@ public class TareaDescargaDatos extends AsyncTask<String, Void, Void>{
         if (dialog != null)
             dialog.dismiss();
 
-        adapter.notifyDataSetChanged();
+        //if(multipleVideojuego)
+            adapter.notifyDataSetChanged();
+        /*else{
+            detalles.videojuego = this.videojuego;
+            Log.d("DAVID1", detalles.videojuego.toString());
+            detalles.mostrarDatos(detalles.videojuego);
+        }*/
     }
 }
 
