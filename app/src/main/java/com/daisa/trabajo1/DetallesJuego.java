@@ -93,6 +93,8 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
         btAnhadirOpinion.setOnClickListener(this);
         btRelacionados.setOnClickListener(this);
         btVerOpiniones.setOnClickListener(this);
+
+        txvTienda.setOnClickListener(this);
     }
 
     @Override
@@ -142,6 +144,14 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
                 intentAnhadirOpinion.putExtra("nombre", txvNombre.getText().toString());
                 intentAnhadirOpinion.putExtra("desarrolladora", txvdesarrolladora.getText().toString());
                 startActivity(intentAnhadirOpinion);
+                break;
+
+            case R.id.tiendaSeleccionada:
+
+                txvTienda = findViewById(R.id.tiendaSeleccionada);
+                Intent intentVerEnMapa = new Intent(this, Mapa.class);
+                intentVerEnMapa.putExtra("tienda", txvTienda.getText().toString());
+                startActivity(intentVerEnMapa);
                 break;
         }
     }
