@@ -52,8 +52,10 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
         txvTienda = findViewById(R.id.tiendaSeleccionada);
         swFavorito = findViewById(R.id.favorito);
 
-        Button btVolver = findViewById(R.id.btAnhadirOpinion);
+        Button btAnhadirOpinion = findViewById(R.id.btAnhadirOpinion);
         Button btRelacionados = findViewById(R.id.relacionados);
+        Button btVerOpiniones = findViewById(R.id.btVerOpiniones);
+
 
         byte[] byteArray = intent.getByteArrayExtra("imagen");
         Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
@@ -88,27 +90,23 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
         swFavorito.setChecked(favorito);
 
 
-        btVolver.setOnClickListener(this);
+        btAnhadirOpinion.setOnClickListener(this);
         btRelacionados.setOnClickListener(this);
+        btVerOpiniones.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btAnhadirOpinion:
-                /*Intent intentOpinion = new Intent(this, AnhadirOpinion.class);
-
-                TextView txvNombre = findViewById(R.id.nombre);
-                TextView txvdesarrolladora = findViewById(R.id.desarrolladora);
-                RatingBar rtValoracion = findViewById(R.id.valoracion);
-
-                intentOpinion.putExtra("nombre", txvNombre.getText().toString());
-                intentOpinion.putExtra("desarrolladora", txvdesarrolladora.getText().toString());
-                intentOpinion.putExtra("valoracion", rtValoracion.getRating());
-                startActivity(intentOpinion);
-                 */
+            case R.id.btVerOpiniones:
+                 /*
                 Intent intentOpinion = new Intent(this, Mapa.class);
+                startActivity(intentOpinion); */
+                Intent intentOpinion = new Intent(this, ListaOpiniones.class);
+                TextView txvNombre = findViewById(R.id.nombre);
+                intentOpinion.putExtra("nombre", txvNombre.getText().toString());
                 startActivity(intentOpinion);
+
                 break;
 
             case R.id.relacionados:
@@ -134,7 +132,17 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
 
                 startActivity(intent);
                 break;
+            case R.id.btAnhadirOpinion:
 
+                Intent intentAnhadirOpinion = new Intent(this, AnhadirOpinion.class);
+
+                txvNombre = findViewById(R.id.nombre);
+                TextView txvdesarrolladora = findViewById(R.id.desarrolladora);
+
+                intentAnhadirOpinion.putExtra("nombre", txvNombre.getText().toString());
+                intentAnhadirOpinion.putExtra("desarrolladora", txvdesarrolladora.getText().toString());
+                startActivity(intentAnhadirOpinion);
+                break;
         }
     }
 

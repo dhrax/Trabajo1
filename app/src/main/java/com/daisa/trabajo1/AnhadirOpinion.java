@@ -41,15 +41,20 @@ public class AnhadirOpinion extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()){
 
             case R.id.btopAñadir:
-
+                TextView txvNombre = findViewById(R.id.opNombre);
                 EditText etOpReview = findViewById(R.id.etOpReview);
                 RatingBar rtValoracion = findViewById(R.id.opValoracion);
 
-                String opinion = etOpReview.getText().toString();
+                String comentario = etOpReview.getText().toString();
                 float valoracion = rtValoracion.getRating();
+
+                Opinion opinion = new Opinion("PRUEBA", txvNombre.getText().toString(), valoracion, comentario);
 
                 //TODO añadir tabla opiniones y metodos para añadir opiniones
 
+                TareaAñadeOpinion tarea = new TareaAñadeOpinion(this, opinion);
+                tarea.execute(Constantes.URL+"add_opinion");
+                onBackPressed();
                 break;
 
         }
