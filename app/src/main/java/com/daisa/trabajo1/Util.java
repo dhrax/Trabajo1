@@ -2,11 +2,16 @@ package com.daisa.trabajo1;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.text.method.PasswordTransformationMethod;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
 
 public class Util {
     public static final int FECHA_PRIMER_VIDEOJUEO=1958;
+    public static int intentosUsuarioFallido=0;
+    public static int intentosContraseñaFallido=0;
 
     /**
      * Convierte un Bitmap en un array de bytes
@@ -52,5 +57,47 @@ public class Util {
         if (fec<FECHA_PRIMER_VIDEOJUEO)
             return false;
         return true;
+    }
+
+
+    /**
+     *
+     * @param contraseña
+     * @return True, si la contraseña cumple los requerimentos
+     *          False si no los cumple
+     */
+    public static boolean contraseñaPermitida(String contraseña){
+
+        if(!contraseña.equals(""))
+            if(!contraseña.contains("@"))
+                return true;
+
+        return false;
+    }
+
+
+    /**
+     *
+     * @param contraseña
+     * @param boton
+     *
+     * Toggle que permite mostrar o no la contraseña en el EditText pasado por parámetro
+     */
+    public static void toggleVerOcultarCntraseña(EditText contraseña, TextView boton){
+
+        String valor = boton.getText().toString();
+        if(valor.equals("MOSTRAR")){
+            contraseña.setTransformationMethod(null);
+            boton.setText("OCULTAR");
+        }else{
+            contraseña.setTransformationMethod(new PasswordTransformationMethod());
+            boton.setText("MOSTRAR");
+        }
+    }
+
+
+    public static boolean comprobarContraseña(Usuario usuario, String contraseña) {
+
+        return usuario.getContraseña().equals(contraseña);
     }
 }

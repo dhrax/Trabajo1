@@ -64,7 +64,6 @@ public class Mapa extends AppCompatActivity implements OnMapReadyCallback {
                     .position(new LatLng(tiendas.getLatitud(), tiendas.getLongitud()))
                     .title(tiendas.getNombre()));
         }
-
     }
 
     @Override
