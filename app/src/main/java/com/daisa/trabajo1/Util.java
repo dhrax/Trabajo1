@@ -30,7 +30,6 @@ public class Util {
      * @return
      */
     public static Bitmap getBitmap(byte[] bytes) {
-
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 

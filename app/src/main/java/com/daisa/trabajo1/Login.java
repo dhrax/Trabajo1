@@ -56,7 +56,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         etContraseña = findViewById(R.id.etContraseña);
 
         handler.postDelayed(runnable, 2000);
-        Log.d("DAVID", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     }
 
     @Override
@@ -69,24 +68,24 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
                 String nomUsuario = etLogin.getText().toString().toLowerCase();
                 String contraseña = etContraseña.getText().toString().toLowerCase();
-                if (!Util.contraseñaPermitida(contraseña)) {
+                /*if (!Util.contraseñaPermitida(contraseña)) {
                     Toast.makeText(getApplicationContext(), "La contraseña no cumple los requisitos", Toast.LENGTH_SHORT).show();
                     return;
-                }
-
-                TareaCompruebaUsuarioContraseña tarea = new TareaCompruebaUsuarioContraseña(this, usuario);
-                Log.d("DAVID", "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+                }*/
+                TareaCuentaUsuarios tareaCuentaUsuarios = new TareaCuentaUsuarios(this);
+                Long numUsuariosPorNombre = 0L;
                 try {
-                    usuario = tarea.execute(Constantes.URL+"usuariosNombre?nombre="+nomUsuario).get();
+                    numUsuariosPorNombre = tareaCuentaUsuarios.execute(Constantes.URL+"contarPorNombre?nombre="+nomUsuario).get();
                 } catch (ExecutionException e) {
-                    e.printStackTrace();
+                    Log.e("ERROR", e.getMessage());
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Log.e("ERROR", e.getMessage());
                 }
 
-                if (Util.comprobarContraseña(usuario, contraseña)) {
-                    /*Toast.makeText(getApplicationContext(), "El usuario no existe", Toast.LENGTH_SHORT).show();
+                if(numUsuariosPorNombre<1L){
                     Util.intentosUsuarioFallido++;
+                    Toast.makeText(getApplicationContext(), "El usuario no existe", Toast.LENGTH_SHORT).show();
+
                     if (Util.intentosUsuarioFallido >= 3) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(this);
                         builder.setMessage("Parece que no está registrado, ¿desea registrarse?").setTitle("Usuario no registrado")
@@ -104,17 +103,26 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                                         new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                // Qué hacer si el usuario pulsa "No"
-                                                // En este caso se cierra directamente el diálogo y no se hace nada más
                                                 Util.intentosUsuarioFallido = 0;
                                                 dialog.dismiss();
                                             }
                                         });
-
                         builder.create().show();
+                    }
+                    return;
+                }
 
+                TareaCompruebaUsuarioContraseña tarea = new TareaCompruebaUsuarioContraseña(this, usuario);
 
-                    }*/
+                try {
+                    usuario = tarea.execute(Constantes.URL+"usuariosNombre?nombre="+nomUsuario).get();
+                } catch (ExecutionException e) {
+                    Log.e("ERROR", e.getMessage());
+                } catch (InterruptedException e) {
+                    Log.e("ERROR", e.getMessage());
+                }
+
+                if (Util.comprobarContraseña(usuario, contraseña)) {
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
                 } else {
@@ -128,8 +136,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
 
-                                                //Intent intent = new Intent(getApplicationContext(), ResetearContrasenha.class);
-                                                //startActivity(intent);
+                                                Intent intent = new Intent(getApplicationContext(), ResetearContrasenha.class);
+                                                startActivity(intent);
                                                 Util.intentosContraseñaFallido = 0;
                                                 dialog.dismiss();
                                             }
@@ -138,8 +146,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                                         new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                // Qué hacer si el usuario pulsa "No"
-                                                // En este caso se cierra directamente el diálogo y no se hace nada más
                                                 Util.intentosContraseñaFallido = 0;
                                                 dialog.dismiss();
                                             }

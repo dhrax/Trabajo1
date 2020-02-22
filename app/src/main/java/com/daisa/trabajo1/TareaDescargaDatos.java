@@ -29,24 +29,12 @@ public class TareaDescargaDatos extends AsyncTask<String, Void, Void>{
     private Activity act;
     ArrayList arrayList;
     VideojuegoAdapter adapter;
-    //private boolean multipleVideojuego;
-    //Videojuego videojuego;
-    //DetallesJuego detalles;
 
     public TareaDescargaDatos(Activity act, ArrayList arrayList, VideojuegoAdapter adapter){
         this.act = act;
         this.arrayList = arrayList;
         this.adapter = adapter;
-        //multipleVideojuego = true;
     }
-    /*
-    public TareaDescargaDatos(Activity act, Videojuego videojuego){
-        this.act = act;
-        this.videojuego = videojuego;
-        multipleVideojuego = false;
-        this.detalles = new DetallesJuego();
-    }
-    */
     @Override
     protected Void doInBackground(String... params) {
 
@@ -55,12 +43,8 @@ public class TareaDescargaDatos extends AsyncTask<String, Void, Void>{
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
             Videojuego[] opinionesArray = restTemplate.getForObject(url, Videojuego[].class);
-            //if(multipleVideojuego)
-                arrayList.addAll(Arrays.asList(opinionesArray));
-            /*else{
-                this.videojuego = opinionesArray[0];
-            }
-             */
+
+            arrayList.addAll(Arrays.asList(opinionesArray));
 
 
         return null;
@@ -70,8 +54,7 @@ public class TareaDescargaDatos extends AsyncTask<String, Void, Void>{
     @Override
     protected void onCancelled() {
         super.onCancelled();
-        //if(multipleVideojuego)
-            arrayList = new ArrayList<>();
+        arrayList = new ArrayList<>();
     }
 
     @Override
@@ -102,13 +85,7 @@ public class TareaDescargaDatos extends AsyncTask<String, Void, Void>{
         if (dialog != null)
             dialog.dismiss();
 
-        //if(multipleVideojuego)
-            adapter.notifyDataSetChanged();
-        /*else{
-            detalles.videojuego = this.videojuego;
-            Log.d("DAVID1", detalles.videojuego.toString());
-            detalles.mostrarDatos(detalles.videojuego);
-        }*/
+        adapter.notifyDataSetChanged();
     }
 }
 

@@ -22,6 +22,8 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+
 public class AnhadirJuego extends AppCompatActivity implements View.OnClickListener{
 
     private final int FOTO_TAREA = 1;
@@ -70,6 +72,10 @@ public class AnhadirJuego extends AppCompatActivity implements View.OnClickListe
 
                 Bitmap imagen = ((BitmapDrawable) imgFotovideojuego.getDrawable()).getBitmap();
 
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                imagen.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] bitmapdata = stream.toByteArray();
+
                 String desarrolladora = drpbtDesarrollador.getSelectedItem().toString();
                 if(desarrolladora.equals(getString(R.string.DrpBtnPorDefecto)))
                     desarrolladora=getString(R.string.desconocida);
@@ -101,7 +107,7 @@ public class AnhadirJuego extends AppCompatActivity implements View.OnClickListe
                 boolean favorito =swFavorito.isChecked();
 
                 Videojuego videojuego = new Videojuego(nombre, desarrolladora, genero, anhoSalida, pc, xbox, playStation, sw, valoracion, tienda, favorito);
-                //videojuego.setImagen(imagen);
+                videojuego.setImagen(bitmapdata);
 
                 TareaAñadeDatos tareaAñadeDatos = new TareaAñadeDatos(this, videojuego);
                 tareaAñadeDatos.execute(Constantes.URL+"add_videojuego");

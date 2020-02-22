@@ -39,7 +39,7 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
         this.setTitle(R.string.detallesJuego);
         Intent intent = getIntent();
 
-        imgImagen = findViewById(R.id.imagenVideojuego);
+        //imgImagen = findViewById(R.id.imagenVideojuego);
         txvNombre = findViewById(R.id.nombre);
         txvdesarrolladora = findViewById(R.id.desarrolladora);
         txvgenero = findViewById(R.id.genero);
@@ -57,8 +57,8 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
         Button btVerOpiniones = findViewById(R.id.btVerOpiniones);
 
 
-        byte[] byteArray = intent.getByteArrayExtra("imagen");
-        Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+        /*byte[] byteArray = intent.getByteArrayExtra("imagen");
+        Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);*/
 
         String nombre = intent.getStringExtra("nombre");
 
@@ -75,7 +75,7 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
 
         //TareaDescargaDatos tarea = new TareaDescargaDatos(this, videojuego);
         //tarea.execute(Constantes.URL+"videojuegosNombre?nombre="+nombre);
-        imgImagen.setImageBitmap(bmp);
+        //imgImagen.setImageBitmap(bmp);
 
         txvNombre.setText(nombre);
         txvdesarrolladora.setText(desarrolladora);
@@ -101,9 +101,6 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btVerOpiniones:
-                 /*
-                Intent intentOpinion = new Intent(this, Mapa.class);
-                startActivity(intentOpinion); */
                 Intent intentOpinion = new Intent(this, ListaOpiniones.class);
                 TextView txvNombre = findViewById(R.id.nombre);
                 intentOpinion.putExtra("nombre", txvNombre.getText().toString());

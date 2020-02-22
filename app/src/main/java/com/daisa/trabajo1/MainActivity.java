@@ -12,8 +12,10 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,7 +26,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
-
+    SharedPref sharedpref;
     public static ArrayList<Videojuego> videojuegos = new ArrayList<>();
     public static VideojuegoAdapter adaptador;
 
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button btAnhadirMain = findViewById(R.id.btAnhadirMain);
         btAnhadirMain.setOnClickListener(this);
 
+        sharedpref = new SharedPref(this);
 
         ListView lvVideojuego = findViewById(R.id.lvVideojuego);
         adaptador = new VideojuegoAdapter(this, videojuegos);
@@ -52,6 +55,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         /*if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         */
+        if(Preferencias.active){
+            if (Preferencias.myswitch.isChecked()){
+                setTheme(R.style.darktheme);
+            }else
+                setTheme(R.style.AppTheme);
+        }
+
+        if(sharedpref.loadNightModeState()){
+            Log.d("DAVID", String.valueOf(sharedpref.loadNightModeState()));
+            setTheme(R.style.darktheme);
+        }
+
         videojuegos.clear();
 
         adaptador.notifyDataSetChanged();
@@ -68,7 +83,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.action_anhadir_videojuego, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.action_anhadir_videojuego, menu);
+        inflater.inflate(R.menu.preferencias_menu, menu);
 
         return true;
     }
@@ -92,6 +109,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(this, AnhadirJuego.class);
                 startActivity(intent);
                 break;
+            case R.id.preferences:
+                Intent intentPref = new Intent(this, Preferencias.class);
+                startActivity(intentPref);
+                break;
         }
 
 
@@ -113,11 +134,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         final int posicion = menuInfo.position; //y esta
 
-        switch (item.getItemId()) {//  Qué item he pulsado
+        /*switch (item.getItemId()) {//  Qué item he pulsado
             case R.id.itemFavorito:
                 Videojuego videojuego = videojuegos.get(posicion);
                 videojuego.favorito();
-                Database db = new Database(this);
+                //Database db = new Database(this);
                 db.videojuegoFavorito(videojuego);
                 adaptador.notifyDataSetChanged();
                 return true;
@@ -149,7 +170,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return true;
             default:
                 return super.onContextItemSelected(item);
-        }
+        }*/
+        return super.onContextItemSelected(item);
     }
 
 
@@ -159,6 +181,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btAnhadirMain:
                 Intent intent = new Intent(this, AnhadirJuego.class);
                 startActivity(intent);
+
                 break;
         }
     }
@@ -168,11 +191,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
         Intent intentMapa = new Intent(this, DetallesJuego.class);
 
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        //ByteArrayOutputStream stream = new ByteArrayOutputStream();
         //videojuegos.get(i).getImagen().compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
+        //byte[] byteArray = stream.toByteArray();
 
-        intentMapa.putExtra("imagen", byteArray);
+        //Log.d("IMAGEN", videojuegos.get(i).getImagen().toString());
+
+        //intentMapa.putExtra("imagen", videojuegos.get(i).getImagen());
         intentMapa.putExtra("nombre", videojuegos.get(i).getNombre());
         intentMapa.putExtra("desarrolladora", videojuegos.get(i).getDesarrolladora());
         intentMapa.putExtra("genero", videojuegos.get(i).getGenero());

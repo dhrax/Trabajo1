@@ -1,11 +1,10 @@
 package com.daisa.trabajo1;
 
-import android.graphics.Bitmap;
 
 public class Videojuego {
 
     private float ID;
-    private Bitmap imagen;
+    private byte[] imagen;
     private String nombre;
     private String desarrolladora;
     private String genero;
@@ -51,19 +50,21 @@ public class Videojuego {
 
     public Videojuego(){}
 
-    public Bitmap getImagen() {
-        return imagen;
-    }
 
-    public void setImagen(Bitmap imagen) {
-        this.imagen = imagen;
-    }
     public float getID() {
         return ID;
     }
 
     public void setID(float ID) {
         this.ID = ID;
+    }
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
     }
 
     public String getNombre() {

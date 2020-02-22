@@ -50,8 +50,6 @@ public class AnhadirOpinion extends AppCompatActivity implements View.OnClickLis
 
                 Opinion opinion = new Opinion("PRUEBA", txvNombre.getText().toString(), valoracion, comentario);
 
-                //TODO añadir tabla opiniones y metodos para añadir opiniones
-
                 TareaAñadeOpinion tarea = new TareaAñadeOpinion(this, opinion);
                 tarea.execute(Constantes.URL+"add_opinion");
                 onBackPressed();

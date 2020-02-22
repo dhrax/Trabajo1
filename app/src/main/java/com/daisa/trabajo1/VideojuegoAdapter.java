@@ -31,7 +31,7 @@ public class VideojuegoAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewholder = null;
+        ViewHolder viewholder;
 
         if(convertView == null){
             convertView = layoutinflater.inflate(R.layout.item_videojuego, null);
@@ -46,7 +46,7 @@ public class VideojuegoAdapter extends BaseAdapter {
             viewholder = (ViewHolder) convertView.getTag();
 
         Videojuego videojuego = videojuegos.get(position);
-        //viewholder.imagen.setImageBitmap(videojuego.getImagen());
+        //viewholder.imagen.setImageBitmap(Util.getBitmap(videojuego.getImagen()));
         viewholder.nombre.setText(videojuego.getNombre());
         viewholder.genero.setText(videojuego.getGenero());
         viewholder.anhoSalida.setText(videojuego.getAnhoSalida());

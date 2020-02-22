@@ -1,4 +1,4 @@
-package com.daisa.trabajo1;
+/*package com.daisa.trabajo1;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -137,3 +137,5 @@ public class Database extends SQLiteOpenHelper {
     }
 
 }
+
+ */

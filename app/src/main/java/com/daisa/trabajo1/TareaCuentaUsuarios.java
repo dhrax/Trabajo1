@@ -22,41 +22,34 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.Semaphore;
 
-public class TareaCompruebaUsuarioContraseña extends AsyncTask<String, Void, Usuario>{
+public class TareaCuentaUsuarios extends AsyncTask<String, Void, Long>{
 
     private boolean error = false;
     private ProgressDialog dialog;
     private Activity act;
-    Usuario usuario;
+    Long numUsuarios;
 
-    public TareaCompruebaUsuarioContraseña(Activity act, Usuario usuario){
+    public TareaCuentaUsuarios(Activity act){
         this.act = act;
-        this.usuario = usuario;
     }
 
 
     @Override
-    protected Usuario doInBackground(String... params) {
+    protected Long doInBackground(String... params) {
 
         String url = params[0];
-        Log.d("DAVID", url);
-        Usuario[] usuariosArray = null;
-            RestTemplate restTemplate = new RestTemplate();
-            restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-            usuariosArray = restTemplate.getForObject(url, Usuario[].class);
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+        numUsuarios = restTemplate.getForObject(url, Long.class);
 
-        Log.d("DAVID", usuariosArray.toString());
-        usuario = usuariosArray[0];
-
-
-        return usuario;
+        return numUsuarios;
 
     }
 
     @Override
     protected void onCancelled() {
         super.onCancelled();
-        usuario = new Usuario();
+        numUsuarios=-1L;
     }
 
     @Override
@@ -75,7 +68,7 @@ public class TareaCompruebaUsuarioContraseña extends AsyncTask<String, Void, Us
 
 
     @Override
-    protected void onPostExecute(Usuario resultado) {
+    protected void onPostExecute(Long resultado) {
         super.onPostExecute(resultado);
 
         if (error) {
