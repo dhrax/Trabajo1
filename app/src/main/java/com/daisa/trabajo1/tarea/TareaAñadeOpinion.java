@@ -31,16 +31,15 @@ public class TareaAñadeOpinion extends AsyncTask<String, Void, Void> {
 
         try {
             // Conecta con la URL y obtenemos el fichero con los datos
-            Log.d("DAVID", "URL = "+urlParam[0]);
+            Log.d("DAVID ANADE OPI", "URL = "+urlParam[0]);
             URL url = new URL(urlParam[0]);
 
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
             restTemplate.getForObject(url + "?autor=" + autor + "&videojuego=" + videojuegoNom +
                     "&valoracion=" + valoracion + "&comentario=" + comentario, Void.class);
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-            Log.d("DAVID ERROR", ioe.getMessage());
+        } catch (Exception e) {
+            Log.d("DAVID ANADE OPI ERROR", e.getMessage());
         }
 
         return null;

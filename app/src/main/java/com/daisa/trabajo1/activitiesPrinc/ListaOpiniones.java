@@ -9,7 +9,7 @@ import android.widget.ListView;
 import com.daisa.trabajo1.R;
 import com.daisa.trabajo1.adapter.OpinionAdapter;
 import com.daisa.trabajo1.objeto.Opinion;
-import com.daisa.trabajo1.tarea.TareaDescargaDatosOpinion;
+import com.daisa.trabajo1.tarea.TareaDescargaDatos;
 import com.daisa.trabajo1.util.Constantes;
 
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class ListaOpiniones extends AppCompatActivity {
 
     private void cargarListaOpiniones() {
 
-        TareaDescargaDatosOpinion tarea = new TareaDescargaDatosOpinion(this, opiniones, adaptador);
+        TareaDescargaDatos tarea = new TareaDescargaDatos(this, opiniones, "Lista Opiniones");
         tarea.execute(Constantes.URL+"opinionesVideojuego?videojuego="+nombre);
     }
 }

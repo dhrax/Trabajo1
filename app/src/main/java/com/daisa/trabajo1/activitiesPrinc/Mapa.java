@@ -1,19 +1,13 @@
 package com.daisa.trabajo1.activitiesPrinc;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,7 +15,7 @@ import android.widget.Toast;
 
 import com.daisa.trabajo1.R;
 import com.daisa.trabajo1.objeto.Tienda;
-import com.daisa.trabajo1.tarea.TareaDescargaDatosTienda;
+import com.daisa.trabajo1.tarea.TareaDescargaDatos;
 import com.daisa.trabajo1.util.Constantes;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -31,7 +25,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -68,10 +61,6 @@ public class Mapa extends AppCompatActivity implements OnMapReadyCallback {
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         fetchLocation();
-
-
-
-
 
         // Inicializa el sistema de mapas de Google
         try {
@@ -110,7 +99,7 @@ public class Mapa extends AppCompatActivity implements OnMapReadyCallback {
 
         Intent intent = getIntent();
         tienda = intent.getStringExtra("tienda");
-        TareaDescargaDatosTienda tarea = new TareaDescargaDatosTienda(this, arrayTiendas);
+        TareaDescargaDatos tarea = new TareaDescargaDatos(this, arrayTiendas, "Lista Tiendas Mapa");
         tarea.execute(Constantes.URL+"tiendasNombre?nombre="+tienda);
     }
 

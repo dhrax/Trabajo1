@@ -22,14 +22,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.Semaphore;
 
-public class TareaCuentaUsuarios extends AsyncTask<String, Void, Long>{
+public class TareaContador extends AsyncTask<String, Void, Long>{
 
     private boolean error = false;
     private ProgressDialog dialog;
     private Activity act;
     Long numUsuarios;
 
-    public TareaCuentaUsuarios(Activity act){
+    public TareaContador(Activity act){
         this.act = act;
     }
 

@@ -7,8 +7,16 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.daisa.trabajo1.adapter.VideojuegoAdapter;
+import com.daisa.trabajo1.activitiesPrinc.ListaOpiniones;
+import com.daisa.trabajo1.activitiesPrinc.MainActivity;
+import com.daisa.trabajo1.adapter.OpinionAdapter;
+import com.daisa.trabajo1.objeto.Opinion;
+import com.daisa.trabajo1.objeto.Tienda;
 import com.daisa.trabajo1.objeto.Videojuego;
+import com.daisa.trabajo1.tab.DesarrolladoraFragment;
+import com.daisa.trabajo1.tab.GeneroFragment;
+import com.daisa.trabajo1.tab.PlataformaFragment;
+import com.daisa.trabajo1.tab.TiendaFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,33 +33,62 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.Semaphore;
 
-public class TareaDescargaDatos extends AsyncTask<String, Void, Void>{
+public class TareaDescargaDatos extends AsyncTask<String, Void, Void> {
 
     private boolean error = false;
     private ProgressDialog dialog;
     private Activity act;
     ArrayList arrayList;
-    VideojuegoAdapter adapter;
+    private String procedencia;
 
-    public TareaDescargaDatos(Activity act, ArrayList arrayList, VideojuegoAdapter adapter){
+    public TareaDescargaDatos(Activity act, ArrayList arrayList, String procedencia) {
         this.act = act;
         this.arrayList = arrayList;
-        this.adapter = adapter;
+        this.procedencia = procedencia.toLowerCase();
     }
+
     @Override
     protected Void doInBackground(String... params) {
 
         String url = params[0];
-
+        try {
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-            Videojuego[] opinionesArray = restTemplate.getForObject(url, Videojuego[].class);
 
-            arrayList.addAll(Arrays.asList(opinionesArray));
+            switch (procedencia) {
 
+                case "lista opiniones":
+                    Opinion[] opinionesArray = restTemplate.getForObject(url, Opinion[].class);
+                    arrayList.addAll(Arrays.asList(opinionesArray));
+                    break;
+                case "lista tiendas mapa":
+                    Tienda[] tiendasArray = restTemplate.getForObject(url, Tienda[].class);
+                    arrayList.addAll(Arrays.asList(tiendasArray));
+                    break;
+
+                case "lista principal":
+
+                case "lista tab desarrolladora":
+
+                case "lista tab plataforma":
+
+                case "lista tab tienda":
+
+                case "lista tab genero":
+                    Videojuego[] videojuegosArray = restTemplate.getForObject(url, Videojuego[].class);
+                    arrayList.addAll(Arrays.asList(videojuegosArray));
+                    break;
+
+                default:
+                    Log.e("LLAMADA NO ENCONTRADA", "Se ha llamado a la descarga de datos desde un lugar no controlado");
+                    break;
+            }
+        } catch (Exception e) {
+            Log.e("DAVID ERROR", e.getMessage());
+            error = true;
+        }
 
         return null;
-
     }
 
     @Override
@@ -63,7 +100,6 @@ public class TareaDescargaDatos extends AsyncTask<String, Void, Void>{
     @Override
     protected void onProgressUpdate(Void... progreso) {
         super.onProgressUpdate(progreso);
-        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -88,7 +124,37 @@ public class TareaDescargaDatos extends AsyncTask<String, Void, Void>{
         if (dialog != null)
             dialog.dismiss();
 
-        adapter.notifyDataSetChanged();
+        switch (procedencia) {
+
+            case "lista opiniones":
+                ListaOpiniones.adaptador.notifyDataSetChanged();
+                break;
+
+            case "lista principal":
+                MainActivity.adaptador.notifyDataSetChanged();
+                break;
+
+            case "lista tab desarrolladora":
+                DesarrolladoraFragment.adaptador.notifyDataSetChanged();
+                break;
+
+            case "lista tab plataforma":
+                PlataformaFragment.adaptador.notifyDataSetChanged();
+                break;
+
+            case "lista tab tienda":
+                TiendaFragment.adaptador.notifyDataSetChanged();
+                break;
+
+            case "lista tab genero":
+                GeneroFragment.adaptador.notifyDataSetChanged();
+                break;
+            case "lista tiendas mapa":
+                break;
+            default:
+                Log.e("LLAMADA NO ENCONTRADA", "Se ha llamado al refresco del adaptador desde un lugar desconocido");
+                break;
+        }
     }
 }
 

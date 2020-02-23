@@ -1,7 +1,5 @@
 package com.daisa.trabajo1.tab;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -23,7 +21,7 @@ import java.util.ArrayList;
 public class DesarrolladoraFragment extends Fragment {
 
     private ArrayList<Videojuego> videojuegos;
-    private VideojuegoAdapter adaptador;
+    public static VideojuegoAdapter adaptador;
     private static String desarrolladora;
 
     public DesarrolladoraFragment(String desarrolladora) {
@@ -70,7 +68,7 @@ public class DesarrolladoraFragment extends Fragment {
         videojuegos.clear();
         adaptador.notifyDataSetChanged();
 
-        TareaDescargaDatos tarea = new TareaDescargaDatos(getActivity(), videojuegos, adaptador);
+        TareaDescargaDatos tarea = new TareaDescargaDatos(getActivity(), videojuegos, "Lista Tab Desarrolladora");
         tarea.execute(Constantes.URL+"videojuegosDesarrolladora?desarrolladora="+desarrolladora);
     }
 }

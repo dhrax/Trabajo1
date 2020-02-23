@@ -1,16 +1,12 @@
 package com.daisa.trabajo1.tab;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.daisa.trabajo1.R;
@@ -25,7 +21,7 @@ import java.util.ArrayList;
 public class PlataformaFragment extends Fragment {
 
     private ArrayList<Videojuego> videojuegos;
-    private VideojuegoAdapter adaptador;
+    public static VideojuegoAdapter adaptador;
     private static boolean pc;
     private static boolean xbox;
     private static boolean playStation;
@@ -78,7 +74,7 @@ public class PlataformaFragment extends Fragment {
         super.onResume();
         videojuegos.clear();
         adaptador.notifyDataSetChanged();
-        TareaDescargaDatos tarea = new TareaDescargaDatos(getActivity(), videojuegos, adaptador);
+        TareaDescargaDatos tarea = new TareaDescargaDatos(getActivity(), videojuegos, "Lista Tab Plataforma");
         tarea.execute(Constantes.URL+"videojuegosPlataforma?pc="+pc+"&xbox="+xbox+"&playStation="+playStation+"&sw="+sw);
     }
 

@@ -1,13 +1,10 @@
 package com.daisa.trabajo1.tab;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,9 +70,8 @@ public class GeneroFragment extends Fragment {
 
         videojuegos.clear();
         adaptador.notifyDataSetChanged();
-        TareaDescargaDatos tarea = new TareaDescargaDatos(getActivity(), videojuegos, adaptador);
+        TareaDescargaDatos tarea = new TareaDescargaDatos(getActivity(), videojuegos, "Lista Tab Genero");
 
         tarea.execute(Constantes.URL+"videojuegosGenero?genero="+genero);
-
     }
 }

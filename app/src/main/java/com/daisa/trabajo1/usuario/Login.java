@@ -19,13 +19,11 @@ import com.daisa.trabajo1.R;
 import com.daisa.trabajo1.activitiesPrinc.MainActivity;
 import com.daisa.trabajo1.objeto.Usuario;
 import com.daisa.trabajo1.tarea.TareaCompruebaUsuarioContraseña;
-import com.daisa.trabajo1.tarea.TareaCuentaUsuarios;
+import com.daisa.trabajo1.tarea.TareaContador;
 import com.daisa.trabajo1.util.Constantes;
 import com.daisa.trabajo1.util.Util;
 
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
@@ -80,7 +78,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     Toast.makeText(getApplicationContext(), "La contraseña no cumple los requisitos", Toast.LENGTH_SHORT).show();
                     return;
                 }*/
-                TareaCuentaUsuarios tareaCuentaUsuarios = new TareaCuentaUsuarios(this);
+                TareaContador tareaCuentaUsuarios = new TareaContador(this);
                 Long numUsuariosPorNombre = 0L;
                 try {
                     numUsuariosPorNombre = tareaCuentaUsuarios.execute(Constantes.URL+"contarPorNombre?nombre="+nomUsuario).get();

@@ -3,16 +3,10 @@ package com.daisa.trabajo1.activitiesPrinc;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,7 +24,6 @@ import com.daisa.trabajo1.preferencia.SharedPref;
 import com.daisa.trabajo1.tarea.TareaDescargaDatos;
 import com.daisa.trabajo1.util.Constantes;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
@@ -71,21 +64,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if(sharedpref.loadNightModeState()){
-            Log.d("DAVID", String.valueOf(sharedpref.loadNightModeState()));
+            //Log.d("DAVID", String.valueOf(sharedpref.loadNightModeState()));
             setTheme(R.style.darktheme);
         }
 
         videojuegos.clear();
-
         adaptador.notifyDataSetChanged();
 
         cargarListaMonumentos();
-
     }
 
     private void cargarListaMonumentos() {
 
-        TareaDescargaDatos tarea = new TareaDescargaDatos(this, videojuegos, adaptador);
+        TareaDescargaDatos tarea = new TareaDescargaDatos(this, videojuegos, "Lista Principal");
         tarea.execute(Constantes.URL+"videojuegos");
     }
 
