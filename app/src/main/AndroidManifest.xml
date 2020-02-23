@@ -17,9 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.daisa.trabajo1.preferencia.Preferencias"
-            android:label="Preferences">
-        </activity>
         <activity android:name="com.daisa.trabajo1.usuario.ResetearContrasenha" />
         <activity android:name="com.daisa.trabajo1.usuario.RegistrarUsuario" />
         <activity android:name="com.daisa.trabajo1.usuario.Login">
@@ -32,7 +29,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD9flnxFwr66BZaKXT21YkdSt0Did4Vh-0" />
-
+        <activity android:name="com.daisa.trabajo1.activitiesPrinc.SettingsActivity" />
         <activity android:name="com.daisa.trabajo1.activitiesPrinc.Mapa" />
         <activity android:name="com.daisa.trabajo1.activitiesPrinc.AnhadirOpinion" />
         <activity android:name="com.daisa.trabajo1.tab.Relacionados" />

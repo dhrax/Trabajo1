@@ -24,35 +24,33 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.Semaphore;
 
-public class TareaCompruebaUsuarioContraseña extends AsyncTask<String, Void, Usuario>{
+public class TareaCompruebaUsuarioContraseña extends AsyncTask<String, Void, Usuario> {
 
     private boolean error = false;
     private ProgressDialog dialog;
     private Activity act;
     Usuario usuario;
 
-    public TareaCompruebaUsuarioContraseña(Activity act, Usuario usuario){
+    public TareaCompruebaUsuarioContraseña(Activity act, Usuario usuario) {
         this.act = act;
         this.usuario = usuario;
     }
-
 
     @Override
     protected Usuario doInBackground(String... params) {
 
         String url = params[0];
         Log.d("DAVID", url);
-        Usuario[] usuariosArray = null;
-            RestTemplate restTemplate = new RestTemplate();
-            restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-            usuariosArray = restTemplate.getForObject(url, Usuario[].class);
+        Usuario[] usuariosArray;
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+        usuariosArray = restTemplate.getForObject(url, Usuario[].class);
 
         Log.d("DAVID", usuariosArray.toString());
         usuario = usuariosArray[0];
 
 
         return usuario;
-
     }
 
     @Override

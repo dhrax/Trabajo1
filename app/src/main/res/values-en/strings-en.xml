@@ -35,6 +35,7 @@
     <string name="detallesJuego">Game Details</string>
     <string name="relacionados">Related</string>
     <string name="anhadir">Add</string>
+    <string name="escribe_tu_review">Write your review</string>
 
     <string-array name="Desarrolladoras">
         <item>Select</item>
