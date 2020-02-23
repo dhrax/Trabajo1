@@ -17,14 +17,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Preferencias"
+        <activity android:name="com.daisa.trabajo1.preferencia.Preferencias"
             android:label="Preferences">
         </activity>
-        <activity android:name=".ResetearContrasenha" />
-        <activity android:name=".RegistrarUsuario" />
-        <activity android:name=".Login">
+        <activity android:name="com.daisa.trabajo1.usuario.ResetearContrasenha" />
+        <activity android:name="com.daisa.trabajo1.usuario.RegistrarUsuario" />
+        <activity android:name="com.daisa.trabajo1.usuario.Login">
         </activity>
-        <activity android:name=".ListaOpiniones" />
+        <activity android:name="com.daisa.trabajo1.activitiesPrinc.ListaOpiniones" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -33,12 +33,12 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD9flnxFwr66BZaKXT21YkdSt0Did4Vh-0" />
 
-        <activity android:name=".Mapa" />
-        <activity android:name=".AnhadirOpinion" />
-        <activity android:name=".Relacionados" />
-        <activity android:name=".DetallesJuego" />
-        <activity android:name=".AnhadirJuego" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.daisa.trabajo1.activitiesPrinc.Mapa" />
+        <activity android:name="com.daisa.trabajo1.activitiesPrinc.AnhadirOpinion" />
+        <activity android:name="com.daisa.trabajo1.tab.Relacionados" />
+        <activity android:name="com.daisa.trabajo1.activitiesPrinc.DetallesJuego" />
+        <activity android:name="com.daisa.trabajo1.activitiesPrinc.AnhadirJuego" />
+        <activity android:name="com.daisa.trabajo1.activitiesPrinc.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
