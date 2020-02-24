@@ -9,6 +9,7 @@ import android.widget.ListView;
 import com.daisa.trabajo1.R;
 import com.daisa.trabajo1.adapter.OpinionAdapter;
 import com.daisa.trabajo1.objeto.Opinion;
+import com.daisa.trabajo1.preferencia.SharedPref;
 import com.daisa.trabajo1.tarea.TareaDescargaDatos;
 import com.daisa.trabajo1.util.Constantes;
 
@@ -19,10 +20,18 @@ public class ListaOpiniones extends AppCompatActivity {
     public static ArrayList<Opinion> opiniones = new ArrayList<>();
     public static OpinionAdapter adaptador;
     String nombre;
+    SharedPref sharedpref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        sharedpref = new SharedPref(this);
+        if(sharedpref.loadNightModeState()){
+            setTheme(R.style.darktheme);
+        }else
+            setTheme(R.style.AppTheme);
+
         setContentView(R.layout.activity_lista_opiniones);
 
         ListView lvOpinion = findViewById(R.id.lvOpiniones);
@@ -49,5 +58,11 @@ public class ListaOpiniones extends AppCompatActivity {
 
         TareaDescargaDatos tarea = new TareaDescargaDatos(this, opiniones, "Lista Opiniones");
         tarea.execute(Constantes.URL+"opinionesVideojuego?videojuego="+nombre);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

@@ -2,6 +2,7 @@ package com.daisa.trabajo1.preferencia;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
@@ -9,26 +10,13 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.daisa.trabajo1.R;
+import com.daisa.trabajo1.activitiesPrinc.MainActivity;
 
 import java.util.List;
 
 
 public class Preferencias extends AppCompatActivity
 {
-    /*@Override
-    public void onBuildHeaders(List<Header> target)
-    {
-        loadHeadersFromResource(R.xml.preference_headers, target);
-    }
-
-    @Override
-    protected boolean isValidFragment(String fragmentName)
-    {
-        return PreferenciasFragment.class.getName().equals(fragmentName);
-    }
-
-     */
-
     public static Switch myswitch;
     public static boolean active;
     SharedPref sharedpref;
@@ -62,8 +50,15 @@ public class Preferencias extends AppCompatActivity
         });
     }
     public void restartApp () {
-        Intent i = new Intent(getApplicationContext(),Preferencias.class);
+        Intent i = new Intent(getApplicationContext(), Preferencias.class);
         startActivity(i);
-        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        TaskStackBuilder.create(getApplicationContext())
+                .addNextIntent(i)
+                .startActivities();
     }
 }

@@ -27,6 +27,7 @@ import com.daisa.trabajo1.util.Constantes;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+
     SharedPref sharedpref;
     public static ArrayList<Videojuego> videojuegos = new ArrayList<>();
     public static VideojuegoAdapter adaptador;
@@ -34,13 +35,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedpref = new SharedPref(this);
+
+        if(sharedpref.loadNightModeState()){
+            setTheme(R.style.darktheme);
+        }else
+            setTheme(R.style.AppTheme);
+
         setContentView(R.layout.activity_main);
         this.setTitle(R.string.gameList);
 
         Button btAnhadirMain = findViewById(R.id.btAnhadirMain);
         btAnhadirMain.setOnClickListener(this);
 
-        sharedpref = new SharedPref(this);
+
 
         ListView lvVideojuego = findViewById(R.id.lvVideojuego);
         adaptador = new VideojuegoAdapter(this, videojuegos);
@@ -50,23 +58,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         registerForContextMenu(lvVideojuego);
     }
 
+
     @Override
     protected void onResume() {
+
         super.onResume();
         /*if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         */
-        if(Preferencias.active){
-            if (Preferencias.myswitch.isChecked()){
-                setTheme(R.style.darktheme);
-            }else
-                setTheme(R.style.AppTheme);
-        }
-
-        if(sharedpref.loadNightModeState()){
-            //Log.d("DAVID", String.valueOf(sharedpref.loadNightModeState()));
-            setTheme(R.style.darktheme);
-        }
 
         videojuegos.clear();
         adaptador.notifyDataSetChanged();
@@ -85,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.action_anhadir_videojuego, menu);
         inflater.inflate(R.menu.preferencias_menu, menu);
-
+        inflater.inflate(R.menu.menu_refrescar, menu);
         return true;
     }
 
@@ -111,6 +110,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.preferences:
                 Intent intentPref = new Intent(this, Preferencias.class);
                 startActivity(intentPref);
+                finish();
+                break;
+
+            case R.id.menuRefrescar:
+                onResume();
                 break;
         }
 
