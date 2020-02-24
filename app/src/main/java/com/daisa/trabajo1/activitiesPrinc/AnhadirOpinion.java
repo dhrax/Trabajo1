@@ -12,14 +12,26 @@ import android.widget.TextView;
 
 import com.daisa.trabajo1.R;
 import com.daisa.trabajo1.objeto.Opinion;
+import com.daisa.trabajo1.preferencia.SharedPref;
 import com.daisa.trabajo1.tarea.TareaAñadeOpinion;
 import com.daisa.trabajo1.util.Constantes;
 
+
+
 public class AnhadirOpinion extends AppCompatActivity implements View.OnClickListener {
+
+    SharedPref sharedpref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        sharedpref = new SharedPref(this);
+        if(sharedpref.loadNightModeState()){
+            setTheme(R.style.darktheme);
+        }else
+            setTheme(R.style.AppTheme);
+
         setContentView(R.layout.activity_anhadir_opinion);
 
         Intent intent = getIntent();
@@ -57,9 +69,17 @@ public class AnhadirOpinion extends AppCompatActivity implements View.OnClickLis
 
                 TareaAñadeOpinion tarea = new TareaAñadeOpinion(this, opinion);
                 tarea.execute(Constantes.URL+"add_opinion");
+                finish();
                 onBackPressed();
+
                 break;
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

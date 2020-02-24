@@ -3,12 +3,9 @@ package com.daisa.trabajo1.activitiesPrinc;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -22,6 +19,8 @@ import android.widget.ListView;
 import com.daisa.trabajo1.R;
 import com.daisa.trabajo1.adapter.VideojuegoAdapter;
 import com.daisa.trabajo1.objeto.Videojuego;
+import com.daisa.trabajo1.preferencia.Preferencias;
+import com.daisa.trabajo1.preferencia.SharedPref;
 import com.daisa.trabajo1.tarea.TareaDescargaDatos;
 import com.daisa.trabajo1.util.Constantes;
 
@@ -29,22 +28,22 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
+    SharedPref sharedpref;
     public static ArrayList<Videojuego> videojuegos = new ArrayList<>();
     public static VideojuegoAdapter adaptador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences pref =
-                PreferenceManager.getDefaultSharedPreferences(
-                        this);
+        sharedpref = new SharedPref(this);
 
-        if(pref.getBoolean("opcion 1", false)){
+        if(sharedpref.loadNightModeState()){
             setTheme(R.style.darktheme);
-        }
+        }else
+            setTheme(R.style.AppTheme);
+
         setContentView(R.layout.activity_main);
         this.setTitle(R.string.gameList);
-
 
         Button btAnhadirMain = findViewById(R.id.btAnhadirMain);
         btAnhadirMain.setOnClickListener(this);
@@ -59,12 +58,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         registerForContextMenu(lvVideojuego);
     }
 
+
     @Override
     protected void onResume() {
+
         super.onResume();
         /*if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         */
+
         videojuegos.clear();
         adaptador.notifyDataSetChanged();
 
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void cargarListaMonumentos() {
+
         TareaDescargaDatos tarea = new TareaDescargaDatos(this, videojuegos, "Lista Principal");
         tarea.execute(Constantes.URL+"videojuegos");
     }
@@ -81,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.action_anhadir_videojuego, menu);
         inflater.inflate(R.menu.preferencias_menu, menu);
-
+        inflater.inflate(R.menu.menu_refrescar, menu);
         return true;
     }
 
@@ -105,9 +108,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.preferences:
-                intent = new Intent(this, SettingsActivity.class);
-                startActivity(intent);
-                //finish();
+                Intent intentPref = new Intent(this, Preferencias.class);
+                startActivity(intentPref);
+                finish();
+                break;
+
+            case R.id.menuRefrescar:
+                onResume();
                 break;
         }
 

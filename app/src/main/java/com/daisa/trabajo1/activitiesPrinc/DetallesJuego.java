@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.daisa.trabajo1.R;
 import com.daisa.trabajo1.objeto.Videojuego;
+import com.daisa.trabajo1.preferencia.SharedPref;
 import com.daisa.trabajo1.tab.Relacionados;
 
 public class DetallesJuego extends AppCompatActivity implements View.OnClickListener {
@@ -36,9 +37,18 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
     TextView txvTienda;
     Switch swFavorito;
 
+    SharedPref sharedpref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        sharedpref = new SharedPref(this);
+        if(sharedpref.loadNightModeState()){
+            setTheme(R.style.darktheme);
+        }else
+            setTheme(R.style.AppTheme);
+
         setContentView(R.layout.activity_detalles_juego);
         this.setTitle(R.string.detallesJuego);
         Intent intent = getIntent();
@@ -157,4 +167,9 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

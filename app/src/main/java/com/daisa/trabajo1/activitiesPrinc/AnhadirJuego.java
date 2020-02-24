@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.daisa.trabajo1.R;
 import com.daisa.trabajo1.objeto.Videojuego;
+import com.daisa.trabajo1.preferencia.SharedPref;
 import com.daisa.trabajo1.tarea.TareaAñadeDatos;
 import com.daisa.trabajo1.util.Constantes;
 import com.daisa.trabajo1.util.Util;
@@ -30,10 +31,18 @@ import java.io.ByteArrayOutputStream;
 public class AnhadirJuego extends AppCompatActivity implements View.OnClickListener{
 
     private final int FOTO_TAREA = 1;
+    SharedPref sharedpref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        sharedpref = new SharedPref(this);
+        if(sharedpref.loadNightModeState()){
+            setTheme(R.style.darktheme);
+        }else
+            setTheme(R.style.AppTheme);
+
         setContentView(R.layout.activity_anhadir_juego);
         this.setTitle(R.string.anhadirJuego);
         Button btVolver = findViewById(R.id.btVolver);
@@ -148,5 +157,11 @@ public class AnhadirJuego extends AppCompatActivity implements View.OnClickListe
             ImageView imageView = (ImageView) findViewById(R.id.imgFotovideojuego);
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }
