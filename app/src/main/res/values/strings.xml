@@ -35,6 +35,9 @@
     <string name="relacionados">Relacionados</string>
     <string name="anhadir">Añadir</string>
     <string name="escribe_tu_review">Escribe tu review</string>
+    <string name="darkMode">Modo Oscuro</string>
+    <string name="nomUsuPublico">Nombre Usuario Publico</string>
+    <string name="usarPreferencias">Usar Preferencias</string>
 
     <string-array name="Desarrolladoras">
         <item>Seleccione</item>

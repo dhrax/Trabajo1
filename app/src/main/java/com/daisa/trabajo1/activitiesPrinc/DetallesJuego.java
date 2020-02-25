@@ -1,12 +1,24 @@
 package com.daisa.trabajo1.activitiesPrinc;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.preference.PreferenceManager;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,7 +29,6 @@ import android.widget.TextView;
 
 import com.daisa.trabajo1.R;
 import com.daisa.trabajo1.objeto.Videojuego;
-import com.daisa.trabajo1.preferencia.SharedPref;
 import com.daisa.trabajo1.tab.Relacionados;
 
 public class DetallesJuego extends AppCompatActivity implements View.OnClickListener {
@@ -37,17 +48,18 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
     TextView txvTienda;
     Switch swFavorito;
 
-    SharedPref sharedpref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        sharedpref = new SharedPref(this);
-        if(sharedpref.loadNightModeState()){
-            setTheme(R.style.darktheme);
-        }else
-            setTheme(R.style.AppTheme);
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if(pref.getBoolean(getString(R.string.usarPreferencias), false))
+            if(pref.getBoolean(getString(R.string.darkMode), false))
+                setTheme(R.style.darktheme);
+            else
+                setTheme(R.style.AppTheme);
 
         setContentView(R.layout.activity_detalles_juego);
         this.setTitle(R.string.detallesJuego);
@@ -166,6 +178,36 @@ public class DetallesJuego extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_telefono, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menuTel:
+                String numTel = "648502424";/*selects del telefono del evento en el que me encuentro*/
+                String dial = "tel:" + numTel;
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse(dial));
+                if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)!= PackageManager.PERMISSION_GRANTED){
+                    return true;
+                }
+                startActivity(intent);
+                break;
+
+            default:
+                break;
+        }
+
+
+
+        return true;
+    }
+
 
     @Override
     public void onBackPressed() {

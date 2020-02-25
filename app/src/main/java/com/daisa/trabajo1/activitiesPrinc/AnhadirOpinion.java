@@ -1,8 +1,10 @@
 package com.daisa.trabajo1.activitiesPrinc;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,25 +14,25 @@ import android.widget.TextView;
 
 import com.daisa.trabajo1.R;
 import com.daisa.trabajo1.objeto.Opinion;
-import com.daisa.trabajo1.preferencia.SharedPref;
 import com.daisa.trabajo1.tarea.TareaAñadeOpinion;
 import com.daisa.trabajo1.util.Constantes;
 
 
-
 public class AnhadirOpinion extends AppCompatActivity implements View.OnClickListener {
 
-    SharedPref sharedpref;
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
 
-        sharedpref = new SharedPref(this);
-        if(sharedpref.loadNightModeState()){
-            setTheme(R.style.darktheme);
-        }else
-            setTheme(R.style.AppTheme);
+        if (pref.getBoolean(getString(R.string.usarPreferencias), false))
+            if (pref.getBoolean(getString(R.string.darkMode), false))
+                setTheme(R.style.darktheme);
+            else
+                setTheme(R.style.AppTheme);
+
 
         setContentView(R.layout.activity_anhadir_opinion);
 
@@ -55,7 +57,7 @@ public class AnhadirOpinion extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
 
             case R.id.btopAñadir:
                 TextView txvNombre = findViewById(R.id.opNombre);
@@ -65,10 +67,15 @@ public class AnhadirOpinion extends AppCompatActivity implements View.OnClickLis
                 String comentario = etOpReview.getText().toString();
                 float valoracion = rtValoracion.getRating();
 
-                Opinion opinion = new Opinion("PRUEBA", txvNombre.getText().toString(), valoracion, comentario);
+                String usuario = "anónimo";
+                if (pref.getBoolean(getString(R.string.usarPreferencias), false))
+                    if ( !pref.getString(getString(R.string.nomUsuPublico), "anónimo").equals(""))
+                        usuario = pref.getString(getString(R.string.nomUsuPublico), "anónimo");
+
+                Opinion opinion = new Opinion(usuario, txvNombre.getText().toString(), valoracion, comentario);
 
                 TareaAñadeOpinion tarea = new TareaAñadeOpinion(this, opinion);
-                tarea.execute(Constantes.URL+"add_opinion");
+                tarea.execute(Constantes.URL + "add_opinion");
                 finish();
                 onBackPressed();
 

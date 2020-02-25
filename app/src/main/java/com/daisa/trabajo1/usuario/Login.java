@@ -1,10 +1,12 @@
 package com.daisa.trabajo1.usuario;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -44,6 +46,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if(pref.getBoolean(getString(R.string.usarPreferencias), false))
+            if(pref.getBoolean(getString(R.string.darkMode), false))
+                setTheme(R.style.darktheme);
+            else
+                setTheme(R.style.AppTheme);
+
         setContentView(R.layout.activity_login);
 
 
@@ -129,6 +140,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 }
 
                 if (Util.comprobarContraseña(usuario, contraseña)) {
+                    finish();
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
                 } else {

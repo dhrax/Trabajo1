@@ -2,7 +2,8 @@ package com.daisa.trabajo1.util;
 
 public class Constantes {
 
-    //public final static String URL = "http://192.168.1.139:8080/";
-    public final static String URL = "http://192.168.42.43:8080/";
+    //TODO cambiar ip por la ip del movil
+    //public final static String URL = "http://192.168.1.139:8080/"; //VAL
+    public final static String URL = "http://192.168.1.114:8080/";
 
 }

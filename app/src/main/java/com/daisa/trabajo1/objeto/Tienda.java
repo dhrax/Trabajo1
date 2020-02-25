@@ -5,6 +5,7 @@ public class Tienda {
     private float ID;
     private String nombre;
     private double latitud, longitud;
+    private long telefono;
 
     public Tienda(String nombre, double latitud, double longitud) {
         this.nombre = nombre;
@@ -52,5 +53,13 @@ public class Tienda {
 
     public void setLongitud(double longitud) {
         this.longitud = longitud;
+    }
+
+    public long getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(long telefono) {
+        this.telefono = telefono;
     }
 }
